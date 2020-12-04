@@ -4,6 +4,16 @@
 
 ![ulti draft](https://user-images.githubusercontent.com/42413958/100570118-733fa980-3295-11eb-9ce1-516e556527e9.png)
 
+## Wireframe
+
+I used Figma to create a wireframe for planning. See [here](https://www.figma.com/file/VDCyu7UnubgQrPNUteRqcB/Wireframe?node-id=0%3A1)!
+
+
+
+---
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
