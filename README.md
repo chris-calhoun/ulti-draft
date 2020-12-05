@@ -4,7 +4,7 @@ This is a web application made for drafting ultimate frisbee players for recreat
 
 ## Motivation
 
-I absolutely love the sport of ultimate frisbee. I have been playing for 8 years and don't plan on stopping anytime soon. Year round, there are recreational leagues that start off with a draft. I have participated in multiple league drafts as a captain and they are always done using either whiteboards or an excel sheet. While fun, they can get kind of hectic and drag on longer than they should. This seemed like the perfect opportunity to solve a problem for a community I deeply care about. 
+I absolutely love the sport of ultimate frisbee. I have been playing for 8 years and don't plan on stopping anytime soon. Year round, there are recreational leagues that start off with a draft. I have participated in multiple league drafts as a captain and they are always done using either whiteboards or an excel sheet. While fun, they can get kind of hectic and drag on longer than they should. This seemed like the perfect opportunity to solve a problem for a community I care about. 
 
 ## Features
 
