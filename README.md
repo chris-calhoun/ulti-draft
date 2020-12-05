@@ -17,6 +17,10 @@ I absolutely love the sport of ultimate frisbee. I have been playing for 8 years
 - React
 - SASS
 
+## Project Planning Video
+
+Check out my overview of the project planning [here](https://www.loom.com/share/46a6a6364fd14b8297abad4aae8a274d).
+
 ## Wireframe
 
 I used Figma to create a wireframe for planning. See [here](https://www.figma.com/file/VDCyu7UnubgQrPNUteRqcB/Wireframe?node-id=0%3A1)!
@@ -25,7 +29,4 @@ I used Figma to create a wireframe for planning. See [here](https://www.figma.co
 
 ![ulti draft](https://user-images.githubusercontent.com/42413958/100570118-733fa980-3295-11eb-9ce1-516e556527e9.png)
 
-## Project Planning Video
-
-Check out my overview of the project planning [here](https://www.loom.com/share/46a6a6364fd14b8297abad4aae8a274d).
 
