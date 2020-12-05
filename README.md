@@ -27,5 +27,5 @@ I used Figma to create a wireframe for planning. See [here](https://www.figma.co
 
 ## Project Planning Video
 
-Check out my overview of the project planning here.
+Check out my overview of the project planning [here](https://www.loom.com/share/46a6a6364fd14b8297abad4aae8a274d).
 
