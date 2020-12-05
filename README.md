@@ -1,86 +1,31 @@
 # ulti.draft
 
-## ERD
+This is a web application made for drafting ultimate frisbee players for recreational leagues. The commissioner has the ability to set up the draft and once it's live, the captains can join and draft their players. After the draft is complete, users can visit the league page and see all of the teams with their respective players.
 
-![ulti draft](https://user-images.githubusercontent.com/42413958/100570118-733fa980-3295-11eb-9ce1-516e556527e9.png)
+## Motivation
+
+I absolutely love the sport of ultimate frisbee. I have been playing for 8 years and don't plan on stopping anytime soon. Year round, there are recreational leagues that start off with a draft. I have participated in multiple league drafts as a captain and they are always done using either whiteboards or an excel sheet. While fun, they can get kind of hectic and drag on longer than they should. This seemed like the perfect opportunity to solve a problem for a community I deeply care about. 
+
+## Features
+
+- add CSV files for list of players signed up for league
+- CRUD capabilities for Leagues, Teams, Players
+
+- Real time syncing for JSON data using Firebase Realtime Database (stretch goal)
+
+## Technologies
+- React
+- SASS
 
 ## Wireframe
 
 I used Figma to create a wireframe for planning. See [here](https://www.figma.com/file/VDCyu7UnubgQrPNUteRqcB/Wireframe?node-id=0%3A1)!
 
+## ERD
 
+![ulti draft](https://user-images.githubusercontent.com/42413958/100570118-733fa980-3295-11eb-9ce1-516e556527e9.png)
 
----
+## Project Planning Video
 
+Check out my overview of the project planning here.
 
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
