@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 export default class ActiveDraft extends Component {
   render() {
@@ -6,6 +6,6 @@ export default class ActiveDraft extends Component {
       <div>
         <h1>Active Draft</h1>
       </div>
-    )
+    );
   }
 }
