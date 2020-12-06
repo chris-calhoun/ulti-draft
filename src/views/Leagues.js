@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 export default class Leagues extends Component {
   render() {
@@ -6,6 +6,6 @@ export default class Leagues extends Component {
       <div>
         <h1>Leagues</h1>
       </div>
-    )
+    );
   }
 }
