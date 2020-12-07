@@ -1,7 +1,7 @@
 import React from 'react';
 import firebase from 'firebase/app';
-import fbConnection from '../helpers/data/connection';
 import { BrowserRouter as Router } from 'react-router-dom';
+import fbConnection from '../helpers/data/connection';
 import Routes from '../helpers/Routes';
 import MyNavbar from '../components/MyNavbar';
 import '../styles/App.scss';
