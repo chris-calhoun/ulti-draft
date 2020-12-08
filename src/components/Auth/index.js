@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import googleImage from './Sign-in-with-Google.png';
 
 export default class Auth extends Component {
   loginClickEvent = (e) => {
@@ -10,11 +9,18 @@ export default class Auth extends Component {
     firebase.auth().signInWithPopup(provider);
   };
 
+  logMeOut = (e) => {
+    e.preventDefault();
+    firebase.auth().signOut();
+  }
+
   render() {
+    const { authed } = this.props;
+    console.warn(authed);
     return (
       <div className='Auth'>
-        <button className='btn btn-secondary' onClick={this.loginClickEvent}>
-          <img src={googleImage} alt='Google Sign In Button' />
+        <button className='nav-link btn btn-primary' onClick={this.loginClickEvent}>
+          Login
         </button>
       </div>
     );

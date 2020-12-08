@@ -8,12 +8,12 @@ import Leagues from '../views/Leagues';
 import Teams from '../views/Teams';
 import NotFound from '../views/NotFound';
 
-export default function Routes() {
+export default function Routes({ authed }) {
   return (
     <Switch>
       <Route
         exact path='/'
-        component={() => <Home />}
+        component={() => <Home authed={authed}/>}
       />
       <Route
         exact path='/active-draft'
@@ -29,11 +29,11 @@ export default function Routes() {
       />
       <Route
         exact path='/leagues'
-        component={() => <Leagues />}
+        component={() => <Leagues authed={authed}/>}
       />
       <Route
         exact path='/teams'
-        component={() => <Teams />}
+        component={() => <Teams authed={authed}/>}
       />
       <Route component={NotFound} />
     </Switch>
