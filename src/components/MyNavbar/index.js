@@ -30,7 +30,7 @@ export default function MyNavbar(props) {
             </NavItem>
           </Nav>
           <Auth authed={authed}/>
-          </Collapse>
+        </Collapse>
       </Navbar>
     </div>
   );
