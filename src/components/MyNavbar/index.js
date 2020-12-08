@@ -11,13 +11,12 @@ import Auth from '../Auth';
 
 export default function MyNavbar(props) {
   const { authed } = props;
-  // console.warn(authed);
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
   return (
     <div>
-      <Navbar color="light" light expand="md">
+      <Navbar color="light" light expand="md" className='justify-content-between'>
         <Link className="navbar-brand" to='/'>ulti.draft</Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
