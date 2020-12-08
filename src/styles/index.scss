@@ -2,6 +2,11 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import 'variables';
 
+// components
+@import './components//index.scss';
+
+@import './App.scss';
+
 body {
   background-color: $favColor;
 }
