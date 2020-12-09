@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
-// import AppModal from '../components/Modal';
+// import LoginModal from '../components/Modal/loginModal';
 
 export default function Home(props) {
   const history = useHistory();
@@ -9,7 +9,7 @@ export default function Home(props) {
 
   const handleCreateBtnClick = () => {
     // if not logged in, show modal with login button
-    !props.authed ? console.warn('log in bish')
+    !props.authed ? console.warn('login please')
     // else, continue onto create draft view
       : navigateToCreate();
   };
