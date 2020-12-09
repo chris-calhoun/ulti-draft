@@ -20,8 +20,9 @@ export default class Auth extends Component {
     // console.warn(authed);
     return (
       <>
+      {/* if not logged in, show login button */}
         { !authed ? <button className='nav-link btn btn-primary' onClick={AuthData.loginClickEvent}>Login</button>
-          // : <button className='nav-link btn btn-danger' onClick={this.logMeOut}>Sign Out</button>
+        // else show user image and dropdown caret with logout button and name
           : <>
               <img className="userInfo" src={authed?.photoURL} alt={authed?.displayName} />
               <UncontrolledDropdown>
