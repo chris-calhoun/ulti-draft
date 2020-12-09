@@ -7,14 +7,9 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
+import AuthData from '../../helpers/data/authData';
 
 export default class Auth extends Component {
-  loginClickEvent = (e) => {
-    e.preventDefault();
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider);
-  };
-
   logMeOut = (e) => {
     e.preventDefault();
     firebase.auth().signOut();
@@ -25,7 +20,7 @@ export default class Auth extends Component {
     // console.warn(authed);
     return (
       <>
-        { !authed ? <button className='nav-link btn btn-primary' onClick={this.loginClickEvent}>Login</button>
+        { !authed ? <button className='nav-link btn btn-primary' onClick={AuthData.loginClickEvent}>Login</button>
           // : <button className='nav-link btn btn-danger' onClick={this.logMeOut}>Sign Out</button>
           : <>
               <img className="userInfo" src={authed?.photoURL} alt={authed?.displayName} />
