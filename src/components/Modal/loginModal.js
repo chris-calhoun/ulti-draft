@@ -6,7 +6,6 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,
 } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 import AuthData from '../../helpers/data/authData';
@@ -35,12 +34,10 @@ const CreateDraftBtn = (props) => {
       <Button color="success" onClick={handleCreateBtnClick}>create draft</Button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle}>Sign in to create draft</ModalHeader>
-        <ModalBody>
-        <button className='nav-link btn btn-primary' onClick={AuthData.loginClickEvent}>Login</button>
+        <ModalBody className="d-flex justify-content-center">
+          <button className='nav-link btn btn-primary mx-2' onClick={AuthData.loginClickEvent}>Login</button>
+          <Button className='mx-2' color="secondary" onClick={toggle}>Cancel</Button>
         </ModalBody>
-        <ModalFooter>
-          <Button color="secondary" onClick={toggle}>Cancel</Button>
-        </ModalFooter>
       </Modal>
     </div>
   );
