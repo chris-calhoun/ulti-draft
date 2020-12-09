@@ -8,10 +8,11 @@ import {
   ModalBody,
   ModalFooter,
 } from 'reactstrap';
+import { useHistory } from 'react-router-dom';
+import AuthData from '../../helpers/data/authData';
 
-const ModalExample = (props) => {
+const CreateDraftBtn = (props) => {
   const {
-    buttonLabel,
     className,
   } = props;
 
@@ -19,16 +20,25 @@ const ModalExample = (props) => {
 
   const toggle = () => setModal(!modal);
 
+  const history = useHistory();
+  const navigateToCreate = () => history.push('/create-draft');
+
+  const handleCreateBtnClick = () => {
+    // if not logged in, show modal with login button
+    !props.authed ? toggle()
+    // else, continue onto create draft view
+      : navigateToCreate();
+  };
+
   return (
     <div>
-      <Button color="danger" onClick={toggle}>{buttonLabel}</Button>
+      <Button color="success" onClick={handleCreateBtnClick}>create draft</Button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+        <ModalHeader toggle={toggle}>Sign in to create draft</ModalHeader>
         <ModalBody>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        <button className='nav-link btn btn-primary' onClick={AuthData.loginClickEvent}>Login</button>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={toggle}>Do Something</Button>{' '}
           <Button color="secondary" onClick={toggle}>Cancel</Button>
         </ModalFooter>
       </Modal>
@@ -36,4 +46,4 @@ const ModalExample = (props) => {
   );
 };
 
-export default ModalExample;
+export default CreateDraftBtn;
