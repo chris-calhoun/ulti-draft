@@ -7,6 +7,7 @@ import {
   FormGroup,
   Label,
   Input,
+  FormText,
 } from 'reactstrap';
 import DatePicker from '../DatePicker';
 import StateDropdown from '../Dropdown/stateDropdown';
@@ -31,8 +32,8 @@ export default class DraftDetailsForm extends Component {
       <Row form>
         <Col md={6}>
           <FormGroup>
-            <Label for="exampleCity">City</Label>
-            <Input type="text" name="city" id="exampleCity" placeholder="Nashville"/>
+            <Label for="city">City</Label>
+            <Input type="text" name="city" id="cityId" placeholder="Nashville"/>
           </FormGroup>
         </Col>
         <Col md={4}>
@@ -44,8 +45,8 @@ export default class DraftDetailsForm extends Component {
         </Col>
         <Col md={2}>
           <FormGroup>
-            <Label for="exampleZip">Zip</Label>
-            <Input type="text" name="zip" id="exampleZip" placeholder="37203"/>
+            <Label for="zipcode">Zip</Label>
+            <Input type="text" name="zipcode" id="zipcodeId" placeholder="37203"/>
           </FormGroup>
         </Col>
       </Row>
@@ -70,12 +71,14 @@ export default class DraftDetailsForm extends Component {
           </Col>
         </Row>
       </FormGroup>
-
       <FormGroup>
-        <Label for="exampleAddress2">Address 2</Label>
-        <Input type="text" name="address2" id="exampleAddress2" placeholder="Apartment, studio, or floor"/>
+        <Label for="csvFile">Add CSV File</Label>
+          <Input type="file" name="csvFile" id="csvFileId" />
+        <FormText color="muted">
+          Please add a CSV file containing a list of the names of players who have signed up for your league.
+        </FormText>
       </FormGroup>
-      <Button>Sign in</Button>
+      <Button>Submit</Button>
     </Form>
     );
   }

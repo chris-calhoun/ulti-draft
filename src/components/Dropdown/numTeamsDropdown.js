@@ -5,7 +5,6 @@ export default function TeamsDropdown() {
 <div className="form-group">
   <label for="sel1">Number of Teams</label>
     <select className="form-control" id="sel1">
-    <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
     <option value="4">4</option>
