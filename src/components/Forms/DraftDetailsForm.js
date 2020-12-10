@@ -8,6 +8,7 @@ import {
   Label,
   Input,
 } from 'reactstrap';
+import DatePicker from '../DatePicker';
 
 export default class DraftDetailsForm extends Component {
   render() {
@@ -22,36 +23,43 @@ export default class DraftDetailsForm extends Component {
         </Col>
       </Row>
       <FormGroup>
-        <Label for="exampleAddress">Address</Label>
-        <Input type="text" name="address" id="exampleAddress" placeholder="1234 Main St"/>
-      </FormGroup>
-      <FormGroup>
-        <Label for="exampleAddress2">Address 2</Label>
-        <Input type="text" name="address2" id="exampleAddress2" placeholder="Apartment, studio, or floor"/>
+        <Label for="fieldAddress">Field Address</Label>
+        <Input type="text" name="address" id="addressId" placeholder="2500 West End"/>
       </FormGroup>
       <Row form>
         <Col md={6}>
           <FormGroup>
             <Label for="exampleCity">City</Label>
-            <Input type="text" name="city" id="exampleCity"/>
+            <Input type="text" name="city" id="exampleCity" placeholder="Nashville"/>
           </FormGroup>
         </Col>
         <Col md={4}>
           <FormGroup>
             <Label for="exampleState">State</Label>
-            <Input type="text" name="state" id="exampleState"/>
+            <Input type="text" name="state" id="exampleState" placeholder="TN"/>
           </FormGroup>
         </Col>
         <Col md={2}>
           <FormGroup>
             <Label for="exampleZip">Zip</Label>
-            <Input type="text" name="zip" id="exampleZip"/>
+            <Input type="text" name="zip" id="exampleZip" placeholder="37203"/>
           </FormGroup>
         </Col>
       </Row>
-      <FormGroup check>
-        <Input type="checkbox" name="check" id="exampleCheck"/>
-        <Label for="exampleCheck" check>Check me out</Label>
+      <FormGroup>
+        <Row>
+          <Col md={6}>
+            <DatePicker title={'Start Date'}/>
+          </Col>
+          <Col md={6}>
+            <DatePicker title={'End Date'}/>
+          </Col>
+        </Row>
+      </FormGroup>
+
+      <FormGroup>
+        <Label for="exampleAddress2">Address 2</Label>
+        <Input type="text" name="address2" id="exampleAddress2" placeholder="Apartment, studio, or floor"/>
       </FormGroup>
       <Button>Sign in</Button>
     </Form>
