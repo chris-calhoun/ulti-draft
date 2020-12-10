@@ -9,6 +9,8 @@ import {
   Input,
 } from 'reactstrap';
 import DatePicker from '../DatePicker';
+import StateDropdown from '../Dropdown/stateDropdown';
+import TeamsDropdown from '../Dropdown/numTeamsDropdown';
 
 export default class DraftDetailsForm extends Component {
   render() {
@@ -35,8 +37,9 @@ export default class DraftDetailsForm extends Component {
         </Col>
         <Col md={4}>
           <FormGroup>
-            <Label for="exampleState">State</Label>
-            <Input type="text" name="state" id="exampleState" placeholder="TN"/>
+            <StateDropdown />
+            {/* <Label for="exampleState">State</Label>
+            <Input type="text" name="state" id="exampleState" placeholder="TN"/> */}
           </FormGroup>
         </Col>
         <Col md={2}>
@@ -53,6 +56,17 @@ export default class DraftDetailsForm extends Component {
           </Col>
           <Col md={6}>
             <DatePicker title={'End Date'}/>
+          </Col>
+        </Row>
+      </FormGroup>
+      <FormGroup>
+        <Row>
+          <Col md={4}>
+          </Col>
+          <Col md={4}>
+            <TeamsDropdown />
+          </Col>
+          <Col md={4}>
           </Col>
         </Row>
       </FormGroup>
