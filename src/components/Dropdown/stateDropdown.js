@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default function StateDropdown() {
+export default function StateDropdown(props) {
   return (
 <div className="form-group">
   <label for="sel1">Select State</label>
-    <select className="form-control" id="sel1">
+    <select className="form-control" id="sel1" value={props.numTeams} onChange={props.OnChange}>
     <option className="disabled">State</option>
     <option value="AL">Alabama</option>
     <option value="AK">Alaska</option>

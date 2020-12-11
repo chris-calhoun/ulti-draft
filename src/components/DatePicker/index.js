@@ -15,12 +15,12 @@ export default class DatePickerDropdown extends Component {
     });
   }
 
-  componentDidUpdate() {
-    // Access ISO String and formatted values from the DOM.
-    const hiddenInputElement = document.getElementById('example-datepicker');
-    console.warn(hiddenInputElement.value); // ISO String, ex: "2016-11-19T12:00:00.000Z"
-    console.warn(hiddenInputElement.getAttribute('data-formattedvalue')); // Formatted String, ex: "11/19/2016"
-  }
+  // componentDidUpdate() {
+  //   // Access ISO String and formatted values from the DOM.
+  //   const hiddenInputElement = document.getElementById('example-datepicker');
+  //   console.warn(hiddenInputElement.value); // ISO String, ex: "2016-11-19T12:00:00.000Z"
+  //   console.warn(hiddenInputElement.getAttribute('data-formattedvalue')); // Formatted String, ex: "11/19/2016"
+  // }
 
   render() {
     const { title } = this.props;
