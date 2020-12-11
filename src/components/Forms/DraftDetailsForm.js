@@ -48,6 +48,18 @@ export default class DraftDetailsForm extends Component {
     LeagueData.createLeague(this.state);
   }
 
+  handleDatePick = (id, formattedValue) => {
+    if (id === 'startDate') {
+      this.setState({
+        startDate: formattedValue,
+      });
+    } else {
+      this.setState({
+        endDate: formattedValue,
+      });
+    }
+  }
+
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -72,7 +84,7 @@ export default class DraftDetailsForm extends Component {
         </Col>
         <Col md={4}>
           <FormGroup>
-            <StateDropdown state={this.state.state} onChange={this.handleChange}/>
+            <StateDropdown onChange={this.handleChange}/>
             {/* <Label for="exampleState">State</Label>
             <Input type="text" name="state" id="exampleState" placeholder="TN"/> */}
           </FormGroup>
@@ -87,10 +99,10 @@ export default class DraftDetailsForm extends Component {
       <FormGroup>
         <Row>
           <Col md={6}>
-            <DatePicker title={'Start Date'}/>
+            <DatePicker title={'Start Date'} name={'startDate'} id={'startDateId'} onDateSelect={this.handleDatePick}/>
           </Col>
           <Col md={6}>
-            <DatePicker title={'End Date'}/>
+            <DatePicker title={'End Date'} name={'endDate'} id={'endDateId'} onDateSelect={this.handleDatePick}/>
           </Col>
         </Row>
       </FormGroup>
@@ -99,7 +111,7 @@ export default class DraftDetailsForm extends Component {
           <Col md={4}>
           </Col>
           <Col md={4}>
-            <TeamsDropdown state={this.state.numTeams} onChange={this.handleChange}/>
+            <TeamsDropdown onChange={this.handleChange}/>
           </Col>
           <Col md={4}>
           </Col>

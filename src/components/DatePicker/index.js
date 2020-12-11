@@ -8,26 +8,26 @@ export default class DatePickerDropdown extends Component {
     value: new Date().toISOString(),
   }
 
-  handleChange(value, formattedValue) {
+  handleDateChange(value, formattedValue) {
     this.setState({
       value, // ISO String, ex: "2016-11-19T12:00:00.000Z"
       formattedValue, // Formatted String, ex: "11/19/2016"
     });
   }
 
-  // componentDidUpdate() {
-  //   // Access ISO String and formatted values from the DOM.
-  //   const hiddenInputElement = document.getElementById('example-datepicker');
-  //   console.warn(hiddenInputElement.value); // ISO String, ex: "2016-11-19T12:00:00.000Z"
-  //   console.warn(hiddenInputElement.getAttribute('data-formattedvalue')); // Formatted String, ex: "11/19/2016"
-  // }
+  componentDidUpdate() {
+    // Access ISO String and formatted values from the DOM.
+    const hiddenInputElement = document.getElementById('example-datepicker');
+    console.warn(hiddenInputElement.value); // ISO String, ex: "2016-11-19T12:00:00.000Z"
+    console.warn(hiddenInputElement.getAttribute('data-formattedvalue')); // Formatted String, ex: "11/19/2016"
+  }
 
   render() {
-    const { title } = this.props;
+    const { title, name } = this.props;
     return (
       <FormGroup>
         <Label>{title}</Label>
-        <DatePicker id="example-datepicker" value={this.state.value} onChange={(v, f) => this.handleChange(v, f)} />
+        <DatePicker id="example-datepicker" name={name} value={this.state.value} onChange={(v, f) => this.handleDateChange(v, f)} />
       </FormGroup>
     );
   }
