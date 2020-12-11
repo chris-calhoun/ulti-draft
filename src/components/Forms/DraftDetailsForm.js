@@ -99,7 +99,7 @@ export default class DraftDetailsForm extends Component {
           <Col md={4}>
           </Col>
           <Col md={4}>
-            <TeamsDropdown />
+            <TeamsDropdown state={this.state.numTeams} onChange={this.handleChange}/>
           </Col>
           <Col md={4}>
           </Col>
