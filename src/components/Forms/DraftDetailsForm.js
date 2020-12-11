@@ -12,9 +12,29 @@ import {
 import DatePicker from '../DatePicker';
 import StateDropdown from '../Dropdown/stateDropdown';
 import TeamsDropdown from '../Dropdown/numTeamsDropdown';
+import AuthData from '../../helpers/data/authData';
 
 export default class DraftDetailsForm extends Component {
+  state = {
+    firebaseKey: '',
+    city: '',
+    state: '',
+    startDate: '',
+    endDate: '',
+    fieldAddress: '',
+    name: '',
+    userId: '',
+  }
+
+  componentDidMount() {
+    const userId = AuthData.getUid();
+    this.setState({
+      userId,
+    });
+  }
+
   render() {
+    console.warn(this.state.userId);
     return (
       <Form>
       <Row form>
@@ -27,7 +47,7 @@ export default class DraftDetailsForm extends Component {
       </Row>
       <FormGroup>
         <Label for="fieldAddress">Field Address</Label>
-        <Input type="text" name="address" id="addressId" placeholder="2500 West End"/>
+        <Input type="text" name="address" id="addressId" placeholder="2500 West End Ave."/>
       </FormGroup>
       <Row form>
         <Col md={6}>
