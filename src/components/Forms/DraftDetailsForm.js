@@ -37,6 +37,7 @@ export default class DraftDetailsForm extends Component {
   }
 
   handleChange = (e) => {
+    console.warn(e.target.value);
     this.setState({
       [e.target.name]: e.target.value,
     });
@@ -71,7 +72,7 @@ export default class DraftDetailsForm extends Component {
         </Col>
         <Col md={4}>
           <FormGroup>
-            <StateDropdown />
+            <StateDropdown state={this.state.state} onChange={this.handleChange}/>
             {/* <Label for="exampleState">State</Label>
             <Input type="text" name="state" id="exampleState" placeholder="TN"/> */}
           </FormGroup>
@@ -98,7 +99,7 @@ export default class DraftDetailsForm extends Component {
           <Col md={4}>
           </Col>
           <Col md={4}>
-            <TeamsDropdown name="numTeams" value={this.state.numTeams} onChange={this.handleChange}/>
+            <TeamsDropdown />
           </Col>
           <Col md={4}>
           </Col>
