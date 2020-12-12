@@ -43,6 +43,7 @@ export default class CaptainsForm extends Component {
         arrCaptains: [...this.state.arrCaptains, { teamCaptain: newCaptain }],
       });
       console.warn(this.state.arrCaptains);
+    // once the prescribed number of captains are added, display submit button
     } else {
       console.warn('all captains have been added');
     }
@@ -50,6 +51,10 @@ export default class CaptainsForm extends Component {
   };
 
   render() {
+    const showCaptains = () => (
+      this.state.arrCaptains.map((captain) => <p>{captain.teamCaptain}</p>)
+    );
+
     return (
       <div>
         <h2>Captain's Form</h2>
@@ -64,6 +69,14 @@ export default class CaptainsForm extends Component {
             </FormGroup>
             <Button onClick={(e) => this.handleClickAddPlayer(e)}>Add Captain</Button>
           </Form>
+        </div>
+        <div>
+          <h3>List of Names</h3>
+          <div>
+            {this.state.arrCaptains.length === 0
+              ? (<p>no captains</p>)
+              : (showCaptains())}
+          </div>
         </div>
       </div>
     );
