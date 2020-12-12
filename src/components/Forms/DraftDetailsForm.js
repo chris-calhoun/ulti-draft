@@ -49,7 +49,7 @@ class DraftDetailsForm extends Component {
     if (history) {
       history.push({
         pathname: './captains',
-        state: { numTeams: this.state.numTeams },
+        state: { numTeams: parseInt(this.state.numTeams, 10) },
       });
     }
   }

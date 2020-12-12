@@ -12,6 +12,7 @@ import TeamData from '../../helpers/data/teamData';
 export default class CaptainsForm extends Component {
   state = {
     teamCaptain: '',
+    numberOfTeams: '',
   };
 
   componentDidMount() {
@@ -20,6 +21,15 @@ export default class CaptainsForm extends Component {
       numberOfTeams,
     });
   }
+
+  createCaptainInputs = (e) => {
+    e.preventDefault();
+    // const arr = [];
+    // for (let i = 1; i <= nTeams; i + 1) {
+    //   arr.push(i);
+    // }
+    console.warn('clicked', this.state.numberOfTeams);
+  };
 
   handleChange = (e) => {
     this.setState({
@@ -33,17 +43,9 @@ export default class CaptainsForm extends Component {
   }
 
   render() {
-    const createCaptainInputs = (nTeams) => {
-      const numberOfTeams = parseInt(nTeams, 10);
-      const arr = [];
-      for (let i = 1; i <= numberOfTeams; i + 1) {
-        arr.push(i);
-      }
-      console.warn(arr);
-    };
-
-    const { numTeams } = this.props;
-    createCaptainInputs(numTeams);
+    // const { numTeams } = this.state.numberOfTeams;
+    // console.warn('number', this.state.numberOfTeams);
+    // this.createCaptainInputs(numTeams);
     return (
       <div>
         <h2>Captain's Form</h2>
@@ -51,12 +53,12 @@ export default class CaptainsForm extends Component {
         <div className="captainForm mx-5">
           <Form onSubmit={this.handleSubmit}>
             <FormGroup row>
-              <Label for="teamCaptain" sm={2}>Team 1 Captain</Label>
+              <Label for="teamCaptain" sm={2}>Add Captain</Label>
               <Col sm={8}>
                 <Input type="text" name="teamCaptain" id="teamCaptain1Id" value={this.state.teamCaptain} onChange={this.handleChange} />
               </Col>
             </FormGroup>
-            <Button>Submit</Button>
+            <Button onClick={(e) => this.createCaptainInputs(e)}>Add Captain</Button>
           </Form>
         </div>
       </div>
