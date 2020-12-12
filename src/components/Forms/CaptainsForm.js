@@ -11,8 +11,9 @@ import TeamData from '../../helpers/data/teamData';
 
 export default class CaptainsForm extends Component {
   state = {
-    teamCaptain: '',
     numberOfTeams: '',
+    teamCaptain: '',
+    arrCaptains: [],
   };
 
   componentDidMount() {
@@ -21,15 +22,6 @@ export default class CaptainsForm extends Component {
       numberOfTeams,
     });
   }
-
-  createCaptainInputs = (e) => {
-    e.preventDefault();
-    // const arr = [];
-    // for (let i = 1; i <= nTeams; i + 1) {
-    //   arr.push(i);
-    // }
-    console.warn('clicked', this.state.numberOfTeams);
-  };
 
   handleChange = (e) => {
     this.setState({
@@ -42,14 +34,26 @@ export default class CaptainsForm extends Component {
     TeamData.createTeam(this.state);
   }
 
+  handleClickAddPlayer = (e) => {
+    e.preventDefault();
+    // if the number of captains is less than the number of teams the user chose
+    if (this.state.arrCaptains.length < this.state.numberOfTeams) {
+      const newCaptain = this.state.teamCaptain;
+      this.setState({
+        arrCaptains: [...this.state.arrCaptains, { teamCaptain: newCaptain }],
+      });
+      console.warn(this.state.arrCaptains);
+    } else {
+      console.warn('all captains have been added');
+    }
+    console.warn(this.state.arrCaptains);
+  };
+
   render() {
-    // const { numTeams } = this.state.numberOfTeams;
-    // console.warn('number', this.state.numberOfTeams);
-    // this.createCaptainInputs(numTeams);
     return (
       <div>
         <h2>Captain's Form</h2>
-        <p>Props: {this.props.numTeams}</p>
+        <p>Props: {this.state.numberOfTeams}</p>
         <div className="captainForm mx-5">
           <Form onSubmit={this.handleSubmit}>
             <FormGroup row>
@@ -58,7 +62,7 @@ export default class CaptainsForm extends Component {
                 <Input type="text" name="teamCaptain" id="teamCaptain1Id" value={this.state.teamCaptain} onChange={this.handleChange} />
               </Col>
             </FormGroup>
-            <Button onClick={(e) => this.createCaptainInputs(e)}>Add Captain</Button>
+            <Button onClick={(e) => this.handleClickAddPlayer(e)}>Add Captain</Button>
           </Form>
         </div>
       </div>
