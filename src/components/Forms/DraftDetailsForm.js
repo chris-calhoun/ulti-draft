@@ -46,7 +46,12 @@ class DraftDetailsForm extends Component {
 
   navigateToCaptainsForm = () => {
     const { history } = this.props;
-    if (history) history.push('./captains');
+    if (history) {
+      history.push({
+        pathname: './captains',
+        state: { numTeams: this.state.numTeams },
+      });
+    }
   }
 
   handleSubmit = (e) => {

@@ -25,7 +25,7 @@ export default function Routes({ authed }) {
       />
       <Route
         exact path='/captains'
-        component={() => <InputCaptainNames />}
+        component={(props) => <InputCaptainNames {...props}/>}
       />
       <Route
         exact path='/leagues'
