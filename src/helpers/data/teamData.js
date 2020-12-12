@@ -11,10 +11,6 @@ const createTeam = (arrOfObjs) => new Promise((resolve, reject) => {
         axios.patch(`${baseUrl}/Team/${response.data.name}.json`, { firebaseKey: response.data.name }).then(resolve);
       }).catch((error) => reject(error));
   });
-  // axios.post(`${baseUrl}/Team.json`, arrOfObjs)
-  //   .then((response) => {
-  //     axios.patch(`${baseUrl}/Team/${response.data.name}.json`, { firebaseKey: response.data.name }).then(resolve);
-  //   }).catch((error) => reject(error));
 });
 
 // eslint-disable-next-line
