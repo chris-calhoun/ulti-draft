@@ -14,6 +14,13 @@ export default class CaptainsForm extends Component {
     teamCaptain: '',
   };
 
+  componentDidMount() {
+    const numberOfTeams = this.props.numTeams;
+    this.setState({
+      numberOfTeams,
+    });
+  }
+
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -25,14 +32,18 @@ export default class CaptainsForm extends Component {
     TeamData.createTeam(this.state);
   }
 
-  createCaptainInputs = (numTeams) => {
-    const numberOfTeams = parseInt(numTeams, 10);
-    for (let i = 0; i < numberOfTeams; i + 1) {
-      // create captain input for each team
-    }
-  }
-
   render() {
+    const createCaptainInputs = (nTeams) => {
+      const numberOfTeams = parseInt(nTeams, 10);
+      const arr = [];
+      for (let i = 1; i <= numberOfTeams; i + 1) {
+        arr.push(i);
+      }
+      console.warn(arr);
+    };
+
+    const { numTeams } = this.props;
+    createCaptainInputs(numTeams);
     return (
       <div>
         <h2>Captain's Form</h2>
