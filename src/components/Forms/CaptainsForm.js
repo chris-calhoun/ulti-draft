@@ -25,7 +25,13 @@ export default class CaptainsForm extends Component {
     TeamData.createTeam(this.state);
   }
 
+  createCaptainInputs = (numTeams) => {
+    const numberOfTeams = parseInt(numTeams, 10);
+    console.warn(numberOfTeams, typeof numberOfTeams);
+  }
+
   render() {
+    this.createCaptainInputs(this.props.numTeams);
     return (
       <div>
         <h2>Captain's Form</h2>
