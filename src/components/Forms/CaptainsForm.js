@@ -32,7 +32,7 @@ export default class CaptainsForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    TeamData.createTeam(this.state);
+    TeamData.createTeam(this.state.arrCaptains);
   }
 
   handleClickAddPlayer = (e) => {
@@ -67,16 +67,29 @@ export default class CaptainsForm extends Component {
 
     const { addOrSubmit } = this.state;
     let showButton;
+    let captainInput;
+
     switch (addOrSubmit) {
       case 'add':
         showButton = (
           <Button onClick={(e) => this.handleClickAddPlayer(e)}>Add Captain</Button>
+        );
+
+        captainInput = (
+          <>
+            <Label for="teamCaptain" sm={2}>Add Captain</Label>
+            <Col sm={8}>
+              <Input type="text" required name="teamCaptain" id="teamCaptain1Id" value={this.state.teamCaptain} onChange={this.handleChange} />
+            </Col>
+          </>
         );
         break;
       case 'submit':
         showButton = (
           <Button onClick={this.handleSubmit}>Submit</Button>
         );
+
+        captainInput = (<> </>);
         break;
       default:
         console.warn('addOrSubmit state not found');
@@ -84,27 +97,22 @@ export default class CaptainsForm extends Component {
 
     return (
       <div>
-        <p>Props: {this.state.numberOfTeams}</p>
+        {/* <p>Props: {this.state.numberOfTeams}</p> */}
         <div className="captainForm mx-5">
           <Form onSubmit={this.handleSubmit}>
             <FormGroup row>
-              <Label for="teamCaptain" sm={2}>Add Captain</Label>
-              <Col sm={8}>
-                <Input type="text" name="teamCaptain" id="teamCaptain1Id" value={this.state.teamCaptain} onChange={this.handleChange} />
-              </Col>
+                {captainInput}
             </FormGroup>
             <div className="captainButtons">
-              {/* <Button onClick={(e) => this.handleClickAddPlayer(e)}>Add Captain</Button>
-              <Button onClick={this.handleSubmit}>Submit</Button> */}
               {showButton}
             </div>
           </Form>
         </div>
         <div>
-          <h4 className="mt-5">List of Names</h4>
+          <h4 className="mt-5">Captains</h4>
           <div>
             {this.state.arrCaptains.length === 0
-              ? (<p>no captains</p>)
+              ? (<p>None added</p>)
               : (showCaptains())}
           </div>
         </div>
