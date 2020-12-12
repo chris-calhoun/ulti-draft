@@ -33,7 +33,6 @@ export default class CaptainsForm extends Component {
   }
 
   render() {
-    this.createCaptainInputs(this.props.numTeams);
     return (
       <div>
         <h2>Captain's Form</h2>
