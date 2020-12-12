@@ -9,6 +9,7 @@ import {
   Input,
   FormText,
 } from 'reactstrap';
+import { withRouter } from 'react-router-dom';
 import StateDropdown from '../Dropdown/stateDropdown';
 import TeamsDropdown from '../Dropdown/numTeamsDropdown';
 import AuthData from '../../helpers/data/authData';
@@ -16,7 +17,7 @@ import LeagueData from '../../helpers/data/leagueData';
 
 const DatePicker = require('reactstrap-date-picker');
 
-export default class DraftDetailsForm extends Component {
+class DraftDetailsForm extends Component {
   state = {
     firebaseKey: '',
     city: '',
@@ -43,9 +44,16 @@ export default class DraftDetailsForm extends Component {
     });
   }
 
+  navigateToCaptainsForm = () => {
+    const { history } = this.props;
+    if (history) history.push('./captains');
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
-    LeagueData.createLeague(this.state);
+    LeagueData.createLeague(this.state).then(() => {
+      this.navigateToCaptainsForm();
+    });
   }
 
   handleStartDateChange(value, formattedValue) {
@@ -135,3 +143,5 @@ export default class DraftDetailsForm extends Component {
     );
   }
 }
+
+export default withRouter(DraftDetailsForm);
