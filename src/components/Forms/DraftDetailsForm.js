@@ -38,7 +38,6 @@ export default class DraftDetailsForm extends Component {
   }
 
   handleChange = (e) => {
-    console.warn(e.target.value);
     this.setState({
       [e.target.name]: e.target.value,
     });
