@@ -14,6 +14,7 @@ export default class CaptainsForm extends Component {
     numberOfTeams: '',
     teamCaptain: '',
     arrCaptains: [],
+    addOrSubmit: 'add',
   };
 
   componentDidMount() {
@@ -47,7 +48,9 @@ export default class CaptainsForm extends Component {
         teamCaptain: '',
       });
       // change add button to submit button
-      console.warn('change add button to submit');
+      this.setState({
+        addOrSubmit: 'submit',
+      });
     } else {
       const newCaptain = this.state.teamCaptain;
       this.setState({
@@ -62,6 +65,23 @@ export default class CaptainsForm extends Component {
       this.state.arrCaptains.map((captain) => <p>{captain.teamCaptain}</p>)
     );
 
+    const { addOrSubmit } = this.state;
+    let showButton;
+    switch (addOrSubmit) {
+      case 'add':
+        showButton = (
+          <Button onClick={(e) => this.handleClickAddPlayer(e)}>Add Captain</Button>
+        );
+        break;
+      case 'submit':
+        showButton = (
+          <Button onClick={this.handleSubmit}>Submit</Button>
+        );
+        break;
+      default:
+        console.warn('addOrSubmit state not found');
+    }
+
     return (
       <div>
         <p>Props: {this.state.numberOfTeams}</p>
@@ -74,7 +94,9 @@ export default class CaptainsForm extends Component {
               </Col>
             </FormGroup>
             <div className="captainButtons">
-              <Button onClick={(e) => this.handleClickAddPlayer(e)}>Add Captain</Button>
+              {/* <Button onClick={(e) => this.handleClickAddPlayer(e)}>Add Captain</Button>
+              <Button onClick={this.handleSubmit}>Submit</Button> */}
+              {showButton}
             </div>
           </Form>
         </div>
