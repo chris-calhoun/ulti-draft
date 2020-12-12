@@ -7,10 +7,11 @@ import {
   Input,
   Col,
 } from 'reactstrap';
+import TeamData from '../../helpers/data/teamData';
 
 export default class CaptainsForm extends Component {
   state = {
-    teamCaptain1: '',
+    teamCaptain: '',
   };
 
   handleChange = (e) => {
@@ -21,7 +22,7 @@ export default class CaptainsForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.warn('submitted');
+    TeamData.createTeam(this.state);
   }
 
   render() {
@@ -32,9 +33,9 @@ export default class CaptainsForm extends Component {
         <div className="captainForm mx-5">
           <Form onSubmit={this.handleSubmit}>
             <FormGroup row>
-              <Label for="teamCaptain1" sm={2}>Team 1 Captain</Label>
+              <Label for="teamCaptain" sm={2}>Team 1 Captain</Label>
               <Col sm={8}>
-                <Input type="text" name="teamCaptain1" id="teamCaptain1Id" value={this.state.teamCaptain1} onChange={this.handleChange} />
+                <Input type="text" name="teamCaptain" id="teamCaptain1Id" value={this.state.teamCaptain} onChange={this.handleChange} />
               </Col>
             </FormGroup>
             <Button>Submit</Button>
