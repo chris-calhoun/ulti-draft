@@ -9,19 +9,20 @@ import {
   Input,
   FormText,
 } from 'reactstrap';
-import DatePicker from '../DatePicker';
 import StateDropdown from '../Dropdown/stateDropdown';
 import TeamsDropdown from '../Dropdown/numTeamsDropdown';
 import AuthData from '../../helpers/data/authData';
 import LeagueData from '../../helpers/data/leagueData';
+
+const DatePicker = require('reactstrap-date-picker');
 
 export default class DraftDetailsForm extends Component {
   state = {
     firebaseKey: '',
     city: '',
     state: '',
-    startDate: '',
-    endDate: '',
+    startDate: new Date().toISOString(),
+    endDate: new Date().toISOString(),
     fieldAddress: '',
     leagueName: '',
     userId: '',
@@ -48,16 +49,18 @@ export default class DraftDetailsForm extends Component {
     LeagueData.createLeague(this.state);
   }
 
-  handleDatePick = (id, formattedValue) => {
-    if (id === 'startDate') {
-      this.setState({
-        startDate: formattedValue,
-      });
-    } else {
-      this.setState({
-        endDate: formattedValue,
-      });
-    }
+  handleStartDateChange(value, formattedValue) {
+    this.setState({
+      startDate: value,
+      startDateF: formattedValue,
+    });
+  }
+
+  handleEndDateChange(value, formattedValue) {
+    this.setState({
+      endDate: value,
+      endDateF: formattedValue,
+    });
   }
 
   render() {
@@ -85,8 +88,6 @@ export default class DraftDetailsForm extends Component {
         <Col md={4}>
           <FormGroup>
             <StateDropdown onChange={this.handleChange}/>
-            {/* <Label for="exampleState">State</Label>
-            <Input type="text" name="state" id="exampleState" placeholder="TN"/> */}
           </FormGroup>
         </Col>
         <Col md={2}>
@@ -99,10 +100,16 @@ export default class DraftDetailsForm extends Component {
       <FormGroup>
         <Row>
           <Col md={6}>
-            <DatePicker title={'Start Date'} name={'startDate'} id={'startDateId'} onDateSelect={this.handleDatePick}/>
+            <FormGroup>
+              <Label>Start Date</Label>
+              <DatePicker name="startDate" value={this.state.startDate} onChange={(v, f) => this.handleStartDateChange(v, f)} />
+            </FormGroup>
           </Col>
           <Col md={6}>
-            <DatePicker title={'End Date'} name={'endDate'} id={'endDateId'} onDateSelect={this.handleDatePick}/>
+            <FormGroup>
+              <Label>End Date</Label>
+              <DatePicker name="endDate" value={this.state.endDate} onChange={(v, f) => this.handleEndDateChange(v, f)} />
+            </FormGroup>
           </Col>
         </Row>
       </FormGroup>
