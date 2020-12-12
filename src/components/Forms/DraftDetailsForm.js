@@ -44,20 +44,24 @@ class DraftDetailsForm extends Component {
     });
   }
 
-  navigateToCaptainsForm = () => {
+  navigateToCaptainsForm = (fbKey) => {
     const { history } = this.props;
     if (history) {
       history.push({
         pathname: './captains',
-        state: { numTeams: parseInt(this.state.numTeams, 10) },
+        state: {
+          numTeams: parseInt(this.state.numTeams, 10),
+          fbKey,
+        },
       });
     }
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    LeagueData.createLeague(this.state).then(() => {
-      this.navigateToCaptainsForm();
+    LeagueData.createLeague(this.state).then((response) => {
+      // console.warn(response.data.firebaseKey);
+      this.navigateToCaptainsForm(response.data.firebaseKey);
     });
   }
 
