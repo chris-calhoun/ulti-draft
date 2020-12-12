@@ -37,17 +37,24 @@ export default class CaptainsForm extends Component {
   handleClickAddPlayer = (e) => {
     e.preventDefault();
     // if the number of captains is less than the number of teams the user chose
-    if (this.state.arrCaptains.length < this.state.numberOfTeams) {
+    const numCaptainsAdded = this.state.arrCaptains.length + 1;
+    console.warn('# of caps: ', numCaptainsAdded);
+    console.warn('# of teams: ', this.state.numberOfTeams);
+    if (numCaptainsAdded === this.state.numberOfTeams) {
+      const lastCaptain = this.state.teamCaptain;
+      this.setState({
+        arrCaptains: [...this.state.arrCaptains, { teamCaptain: lastCaptain }],
+        teamCaptain: '',
+      });
+      // change add button to submit button
+      console.warn('change add button to submit');
+    } else {
       const newCaptain = this.state.teamCaptain;
       this.setState({
         arrCaptains: [...this.state.arrCaptains, { teamCaptain: newCaptain }],
+        teamCaptain: '',
       });
-      console.warn(this.state.arrCaptains);
-    // once the prescribed number of captains are added, display submit button
-    } else {
-      console.warn('all captains have been added');
     }
-    console.warn(this.state.arrCaptains);
   };
 
   render() {
@@ -57,7 +64,6 @@ export default class CaptainsForm extends Component {
 
     return (
       <div>
-        <h2>Captain's Form</h2>
         <p>Props: {this.state.numberOfTeams}</p>
         <div className="captainForm mx-5">
           <Form onSubmit={this.handleSubmit}>
@@ -67,11 +73,13 @@ export default class CaptainsForm extends Component {
                 <Input type="text" name="teamCaptain" id="teamCaptain1Id" value={this.state.teamCaptain} onChange={this.handleChange} />
               </Col>
             </FormGroup>
-            <Button onClick={(e) => this.handleClickAddPlayer(e)}>Add Captain</Button>
+            <div className="captainButtons">
+              <Button onClick={(e) => this.handleClickAddPlayer(e)}>Add Captain</Button>
+            </div>
           </Form>
         </div>
         <div>
-          <h3>List of Names</h3>
+          <h4 className="mt-5">List of Names</h4>
           <div>
             {this.state.arrCaptains.length === 0
               ? (<p>no captains</p>)
