@@ -27,7 +27,9 @@ export default class CaptainsForm extends Component {
 
   createCaptainInputs = (numTeams) => {
     const numberOfTeams = parseInt(numTeams, 10);
-    console.warn(numberOfTeams, typeof numberOfTeams);
+    for (let i = 0; i < numberOfTeams; i + 1) {
+      // create captain input for each team
+    }
   }
 
   render() {
