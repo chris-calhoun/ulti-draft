@@ -37,12 +37,15 @@ export default class CaptainsForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { arrCaptains, leagueFireBK } = this.state;
-    TeamData.createTeam(arrCaptains)
-      .then((response) => {
-        const teamFBKey = response.data.firebaseKey;
-        // console.warn(response.data.leagueFireBK);
-        LeagueTeamData.createLeagueTeamJoin(arrCaptains, teamFBKey, leagueFireBK);
-      });
+
+    arrCaptains.forEach((team) => {
+      TeamData.createTeam(team)
+        .then((response) => {
+          const teamFBKey = response.data.firebaseKey;
+          // console.warn(response.data.leagueFireBK);
+          LeagueTeamData.createLeagueTeamJoin(teamFBKey, leagueFireBK);
+        });
+    });
   }
 
   handleClickAddPlayer = (e) => {
