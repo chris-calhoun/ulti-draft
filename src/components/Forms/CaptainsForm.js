@@ -30,11 +30,9 @@ class CaptainsForm extends Component {
   }
 
   navigateToDraft = () => {
-    const { history } = this.props;
+    const { history, leagueFBKey } = this.props;
     if (history) {
-      history.push({
-        pathname: './active-draft',
-      });
+      history.push(`/active-draft/${leagueFBKey}`);
     }
   }
 
