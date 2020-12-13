@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button } from 'reactstrap';
 import CreateDraftBtn from '../components/Modal/loginModal';
+import AppModal from '../components/Modal/appModal';
+import JoinDraftForm from '../components/Forms/JoinDraftForm';
 
 export default function Home(props) {
   return (
@@ -8,7 +9,7 @@ export default function Home(props) {
       <h1 className='title mb-5'>ulti.draft</h1>
       <div className='homeBtns'>
         <CreateDraftBtn authed={props.authed} />
-        <Button className='draftBtns btn-block' color="success">join draft</Button>
+        <AppModal title={'Enter code to join draft'} buttonLabel={'join draft'}><JoinDraftForm /></AppModal>
       </div>
     </div>
   );
