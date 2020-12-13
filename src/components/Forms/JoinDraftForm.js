@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import {
   Button,
 } from 'reactstrap';
+import { withRouter } from 'react-router-dom';
 
-export default class JoinDraftForm extends Component {
+class JoinDraftForm extends Component {
   state = {
     draftCode: '',
   }
@@ -14,19 +15,19 @@ export default class JoinDraftForm extends Component {
     });
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const { draftCode } = this.state.draftCode;
-    this.navigateToCaptainsForm(draftCode);
-  }
-
-  navigateToCaptainsForm = (draftCode) => {
+  navigateToDraft = (draftCode) => {
     const { history } = this.props;
     if (history) {
       history.push({
         pathname: `./active-draft/${draftCode}`,
       });
     }
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { draftCode } = this.state;
+    this.navigateToDraft(draftCode);
   }
 
   render() {
@@ -40,8 +41,12 @@ export default class JoinDraftForm extends Component {
           className='form-control form-control-lg m-1'
           required
           />
-        <Button>submit</Button>
+          <div className="d-flex justify-content-center mt-3">
+            <Button>submit</Button>
+          </div>
       </form>
     );
   }
 }
+
+export default withRouter(JoinDraftForm);
