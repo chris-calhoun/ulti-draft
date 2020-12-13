@@ -9,5 +9,11 @@ const createLeague = (object) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
+const getLeague = (fbKey) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/League/${fbKey}.json`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
+
 // eslint-disable-next-line
-export default { createLeague };
+export default { createLeague, getLeague };

@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import {
   Button,
+  Form,
+  Input,
+  FormText,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
+import LeagueData from '../../helpers/data/leagueData';
 
 class JoinDraftForm extends Component {
   state = {
     draftCode: '',
+    draftExists: true,
   }
 
   handleChange = (e) => {
@@ -27,24 +32,41 @@ class JoinDraftForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { draftCode } = this.state;
-    this.navigateToDraft(draftCode);
+
+    LeagueData.getLeague(draftCode).then((resp) => {
+      if (resp) {
+        this.navigateToDraft(draftCode);
+      } else {
+        this.setState({
+          draftExists: false,
+        });
+      }
+    });
   }
 
   render() {
+    let showErrorText;
+    const { draftExists } = this.state;
+
+    switch (draftExists) {
+      case false:
+        showErrorText = (
+          <FormText color="danger">Draft does not exist, please try again.</FormText>
+        );
+        break;
+      case true:
+        break;
+      default:
+        console.warn('addOrSubmit state not found');
+    }
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          type='text'
-          name='draftCode'
-          value={this.state.name}
-          onChange={this.handleChange}
-          className='form-control form-control-lg m-1'
-          required
-          />
+      <Form onSubmit={this.handleSubmit}>
+          <Input type="text" name="draftCode" id="draftCodeId" value={this.state.name} onChange={this.handleChange} required/>
+          {showErrorText}
           <div className="d-flex justify-content-center mt-3">
             <Button>submit</Button>
           </div>
-      </form>
+      </Form>
     );
   }
 }
