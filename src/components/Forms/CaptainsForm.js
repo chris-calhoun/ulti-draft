@@ -8,19 +8,23 @@ import {
   Col,
 } from 'reactstrap';
 import TeamData from '../../helpers/data/teamData';
+import LeagueTeamData from '../../helpers/data/leagueTeamsData';
 
 export default class CaptainsForm extends Component {
   state = {
     numberOfTeams: '',
     teamCaptain: '',
+    leagueFireBK: '',
     arrCaptains: [],
     addOrSubmit: 'add',
   };
 
   componentDidMount() {
     const numberOfTeams = this.props.numTeams;
+    const leagueFireBK = this.props.leagueFBKey;
     this.setState({
       numberOfTeams,
+      leagueFireBK,
     });
   }
 
@@ -32,15 +36,21 @@ export default class CaptainsForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    TeamData.createTeam(this.state.arrCaptains);
+    const { arrCaptains, leagueFireBK } = this.state;
+    TeamData.createTeam(arrCaptains)
+      .then((response) => {
+        const teamFBKey = response.data.firebaseKey;
+        // console.warn(response.data.leagueFireBK);
+        LeagueTeamData.createLeagueTeamJoin(arrCaptains, teamFBKey, leagueFireBK);
+      });
   }
 
   handleClickAddPlayer = (e) => {
     e.preventDefault();
     // if the number of captains is less than the number of teams the user chose
     const numCaptainsAdded = this.state.arrCaptains.length + 1;
-    console.warn('# of caps: ', numCaptainsAdded);
-    console.warn('# of teams: ', this.state.numberOfTeams);
+    // console.warn('# of caps: ', numCaptainsAdded);
+    // console.warn('# of teams: ', this.state.numberOfTeams);
     if (numCaptainsAdded === this.state.numberOfTeams) {
       const lastCaptain = this.state.teamCaptain;
       this.setState({
