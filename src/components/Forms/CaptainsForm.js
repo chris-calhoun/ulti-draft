@@ -7,10 +7,11 @@ import {
   Input,
   Col,
 } from 'reactstrap';
+import { withRouter } from 'react-router-dom';
 import TeamData from '../../helpers/data/teamData';
 import LeagueTeamData from '../../helpers/data/leagueTeamsData';
 
-export default class CaptainsForm extends Component {
+class CaptainsForm extends Component {
   state = {
     numberOfTeams: '',
     teamCaptain: '',
@@ -26,6 +27,15 @@ export default class CaptainsForm extends Component {
       numberOfTeams,
       leagueFireBK,
     });
+  }
+
+  navigateToDraft = () => {
+    const { history } = this.props;
+    if (history) {
+      history.push({
+        pathname: './active-draft',
+      });
+    }
   }
 
   handleChange = (e) => {
@@ -46,6 +56,8 @@ export default class CaptainsForm extends Component {
           LeagueTeamData.createLeagueTeamJoin(teamFBKey, leagueFireBK);
         });
     });
+    // console.warn(response.data.firebaseKey);
+    this.navigateToDraft();
   }
 
   handleClickAddPlayer = (e) => {
@@ -133,3 +145,5 @@ export default class CaptainsForm extends Component {
     );
   }
 }
+
+export default withRouter(CaptainsForm);

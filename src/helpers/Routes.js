@@ -17,7 +17,7 @@ export default function Routes({ authed }) {
       />
       <Route
         exact path='/active-draft'
-        component={() => <ActiveDraft />}
+        component={(props) => <ActiveDraft {...props} />}
       />
       <Route
         exact path='/create-draft'
