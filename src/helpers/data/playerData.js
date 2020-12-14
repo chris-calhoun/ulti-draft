@@ -6,9 +6,9 @@ const createPlayer = (obj) => new Promise((resolve, reject) => {
   // console.warn(arrOfObjs);
   // arrOfObjs.forEach((team) => {
   // console.warn(team);
-  axios.post(`${baseUrl}/Player.json`, obj)
+  axios.post(`${baseUrl}/Player.json`, obj['1'].data)
     .then((response) => {
-      axios.patch(`${baseUrl}/Team/${response.data.name}.json`, { firebaseKey: response.data.name }).then(resolve);
+      axios.patch(`${baseUrl}/Player/${response.data.name}.json`, { id: response.data.name }).then(resolve);
     }).catch((error) => reject(error));
   // });
 });

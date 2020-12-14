@@ -61,7 +61,7 @@ class DraftDetailsForm extends Component {
         pathname: './captains',
         state: {
           leagueObj: {
-            numTeams: parseInt(this.state.numTeams, 10),
+            numTeams: parseInt(this.state.leagueObj.numTeams, 10),
             fbKey,
           },
         },
