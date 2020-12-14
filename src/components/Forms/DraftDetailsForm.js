@@ -38,14 +38,19 @@ class DraftDetailsForm extends Component {
 
   componentDidMount() {
     const userId = AuthData.getUid();
+    const leagueCopy = this.state.leagueObj;
+    leagueCopy.userId = userId;
     this.setState({
-      userId,
+      leagueObj: leagueCopy,
     });
   }
 
   handleChange = (e) => {
+    const leagueCopy = this.state.leagueObj;
+    leagueCopy[e.target.name] = e.target.value;
+
     this.setState({
-      [e.target.name]: e.target.value,
+      leagueObj: leagueCopy,
     });
   }
 
@@ -55,8 +60,10 @@ class DraftDetailsForm extends Component {
       history.push({
         pathname: './captains',
         state: {
-          numTeams: parseInt(this.state.numTeams, 10),
-          fbKey,
+          leagueObj: {
+            numTeams: parseInt(this.state.numTeams, 10),
+            fbKey,
+          },
         },
       });
     }
@@ -75,16 +82,20 @@ class DraftDetailsForm extends Component {
   }
 
   handleStartDateChange(value, formattedValue) {
+    const leagueCopy = this.state.leagueObj;
+    leagueCopy.startDate = value;
+    leagueCopy.startDateF = formattedValue;
     this.setState({
-      startDate: value,
-      startDateF: formattedValue,
+      leagueObj: leagueCopy,
     });
   }
 
   handleEndDateChange(value, formattedValue) {
+    const leagueCopy = this.state.leagueObj;
+    leagueCopy.endDate = value;
+    leagueCopy.endDateF = formattedValue;
     this.setState({
-      endDate: value,
-      endDateF: formattedValue,
+      leagueObj: leagueCopy,
     });
   }
 
@@ -113,19 +124,19 @@ class DraftDetailsForm extends Component {
         <Col>
           <FormGroup>
             <Label htmlFor="leagueName">League Name</Label>
-            <Input type="text" name="leagueName" id="leagueNameId" placeholder="Nashville Indoor League" value={this.state.leagueName} onChange={this.handleChange} />
+            <Input type="text" name="leagueName" id="leagueNameId" placeholder="Nashville Indoor League" value={this.state.leagueObj.leagueName} onChange={this.handleChange} />
           </FormGroup>
         </Col>
       </Row>
       <FormGroup>
         <Label htmlFor="fieldAddress">Field Address</Label>
-        <Input type="text" name="fieldAddress" id="addressId" placeholder="2500 West End Ave." value={this.state.address} onChange={this.handleChange}/>
+        <Input type="text" name="fieldAddress" id="addressId" placeholder="2500 West End Ave." value={this.state.leagueObj.address} onChange={this.handleChange}/>
       </FormGroup>
       <Row form>
         <Col md={6}>
           <FormGroup>
             <Label htmlFor="city">City</Label>
-            <Input type="text" name="city" id="cityId" placeholder="Nashville" value={this.state.city} onChange={this.handleChange}/>
+            <Input type="text" name="city" id="cityId" placeholder="Nashville" value={this.state.leagueObj.city} onChange={this.handleChange}/>
           </FormGroup>
         </Col>
         <Col md={4}>
@@ -136,7 +147,7 @@ class DraftDetailsForm extends Component {
         <Col md={2}>
           <FormGroup>
             <Label htmlFor="zipcode">Zip</Label>
-            <Input type="text" name="zipcode" id="zipcodeId" placeholder="37203" value={this.state.zipcode} onChange={this.handleChange}/>
+            <Input type="text" name="zipcode" id="zipcodeId" placeholder="37203" value={this.state.leagueObj.zipcode} onChange={this.handleChange}/>
           </FormGroup>
         </Col>
       </Row>
@@ -145,13 +156,13 @@ class DraftDetailsForm extends Component {
           <Col md={6}>
             <FormGroup>
               <Label>Start Date</Label>
-              <DatePicker name="startDate" value={this.state.startDate} onChange={(v, f) => this.handleStartDateChange(v, f)} />
+              <DatePicker name="startDate" value={this.state.leagueObj.startDate} onChange={(v, f) => this.handleStartDateChange(v, f)} />
             </FormGroup>
           </Col>
           <Col md={6}>
             <FormGroup>
               <Label>End Date</Label>
-              <DatePicker name="endDate" value={this.state.endDate} onChange={(v, f) => this.handleEndDateChange(v, f)} />
+              <DatePicker name="endDate" value={this.state.leagueObj.endDate} onChange={(v, f) => this.handleEndDateChange(v, f)} />
             </FormGroup>
           </Col>
         </Row>
