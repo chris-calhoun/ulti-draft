@@ -3,7 +3,7 @@ import React from 'react';
 export default function StateDropdown(props) {
   return (
 <div className="form-group">
-  <label for="sel1">Select State</label>
+  <label htmlFor="sel1">Select State</label>
     <select className="form-control" name="state" id="sel1" onChange={props.onChange}>
     <option className="disabled">State</option>
     <option value="AL">Alabama</option>

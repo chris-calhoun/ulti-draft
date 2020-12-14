@@ -85,19 +85,19 @@ class DraftDetailsForm extends Component {
       <Row form>
         <Col>
           <FormGroup>
-            <Label for="leagueName">League Name</Label>
+            <Label htmlFor="leagueName">League Name</Label>
             <Input type="text" name="leagueName" id="leagueNameId" placeholder="Nashville Indoor League" value={this.state.leagueName} onChange={this.handleChange} />
           </FormGroup>
         </Col>
       </Row>
       <FormGroup>
-        <Label for="fieldAddress">Field Address</Label>
+        <Label htmlFor="fieldAddress">Field Address</Label>
         <Input type="text" name="fieldAddress" id="addressId" placeholder="2500 West End Ave." value={this.state.address} onChange={this.handleChange}/>
       </FormGroup>
       <Row form>
         <Col md={6}>
           <FormGroup>
-            <Label for="city">City</Label>
+            <Label htmlFor="city">City</Label>
             <Input type="text" name="city" id="cityId" placeholder="Nashville" value={this.state.city} onChange={this.handleChange}/>
           </FormGroup>
         </Col>
@@ -108,7 +108,7 @@ class DraftDetailsForm extends Component {
         </Col>
         <Col md={2}>
           <FormGroup>
-            <Label for="zipcode">Zip</Label>
+            <Label htmlFor="zipcode">Zip</Label>
             <Input type="text" name="zipcode" id="zipcodeId" placeholder="37203" value={this.state.zipcode} onChange={this.handleChange}/>
           </FormGroup>
         </Col>
@@ -141,7 +141,7 @@ class DraftDetailsForm extends Component {
         </Row>
       </FormGroup>
       <FormGroup>
-        <Label for="csvFile">Add CSV File</Label>
+        <Label htmlFor="csvFile">Add CSV File</Label>
           <Input type="file" name="csvFile" id="csvFileId" />
         <FormText color="muted">
           Please add a CSV file containing a list of the names of players who have signed up for your league.

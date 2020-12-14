@@ -3,10 +3,8 @@ import React from 'react';
 export default function TeamsDropdown(props) {
   return (
 <div className="form-group">
-  <label for="sel1">Number of Teams</label>
+  <label htmlFor="sel1">Number of Teams</label>
     <select className="form-control" name="numTeams" onChange={props.onChange} id="sel1">
-    <option value="2">2</option>
-    <option value="3">3</option>
     <option value="4">4</option>
     <option value="5">5</option>
     <option value="6">6</option>

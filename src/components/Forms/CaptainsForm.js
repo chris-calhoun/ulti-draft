@@ -100,7 +100,7 @@ class CaptainsForm extends Component {
 
         captainInput = (
           <>
-            <Label for="teamCaptain" sm={2}>Add Captain</Label>
+            <Label htmlFor="teamCaptain" sm={2}>Add Captain</Label>
             <Col sm={8}>
               <Input type="text" required name="teamCaptain" id="teamCaptain1Id" value={this.state.teamCaptain} onChange={this.handleChange} />
             </Col>
