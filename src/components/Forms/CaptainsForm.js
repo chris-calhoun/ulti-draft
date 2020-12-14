@@ -21,8 +21,9 @@ class CaptainsForm extends Component {
   };
 
   componentDidMount() {
-    const numberOfTeams = this.props.numTeams;
-    const leagueFireBK = this.props.leagueFBKey;
+    const { numTeams, fbKey } = this.props.location.state.leagueObj;
+    const numberOfTeams = numTeams;
+    const leagueFireBK = fbKey;
     this.setState({
       numberOfTeams,
       leagueFireBK,
@@ -30,9 +31,10 @@ class CaptainsForm extends Component {
   }
 
   navigateToDraft = () => {
-    const { history, leagueFBKey } = this.props;
+    const { history } = this.props;
+    const { leagueFireBK } = this.state;
     if (history) {
-      history.push(`/active-draft/${leagueFBKey}`);
+      history.push(`/active-draft/${leagueFireBK}`);
     }
   }
 
@@ -60,10 +62,9 @@ class CaptainsForm extends Component {
 
   handleClickAddPlayer = (e) => {
     e.preventDefault();
-    // if the number of captains is less than the number of teams the user chose
     const numCaptainsAdded = this.state.arrCaptains.length + 1;
-    // console.warn('# of caps: ', numCaptainsAdded);
-    // console.warn('# of teams: ', this.state.numberOfTeams);
+    console.warn('# of caps: ', numCaptainsAdded);
+    console.warn('# of teams: ', this.state.numberOfTeams);
     if (numCaptainsAdded === this.state.numberOfTeams) {
       const lastCaptain = this.state.teamCaptain;
       this.setState({
@@ -100,7 +101,7 @@ class CaptainsForm extends Component {
 
         captainInput = (
           <>
-            <Label for="teamCaptain" sm={2}>Add Captain</Label>
+            <Label htmlFor="teamCaptain" sm={2}>Add Captain</Label>
             <Col sm={8}>
               <Input type="text" required name="teamCaptain" id="teamCaptain1Id" value={this.state.teamCaptain} onChange={this.handleChange} />
             </Col>
