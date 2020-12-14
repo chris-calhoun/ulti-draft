@@ -60,10 +60,9 @@ class CaptainsForm extends Component {
 
   handleClickAddPlayer = (e) => {
     e.preventDefault();
-    // if the number of captains is less than the number of teams the user chose
     const numCaptainsAdded = this.state.arrCaptains.length + 1;
-    // console.warn('# of caps: ', numCaptainsAdded);
-    // console.warn('# of teams: ', this.state.numberOfTeams);
+    console.warn('# of caps: ', numCaptainsAdded);
+    console.warn('# of teams: ', this.state.numberOfTeams);
     if (numCaptainsAdded === this.state.numberOfTeams) {
       const lastCaptain = this.state.teamCaptain;
       this.setState({
