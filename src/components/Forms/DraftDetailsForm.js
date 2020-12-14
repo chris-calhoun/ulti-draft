@@ -8,6 +8,7 @@ import {
   Label,
   Input,
   FormText,
+  CustomInput,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import StateDropdown from '../Dropdown/stateDropdown';
@@ -141,8 +142,10 @@ class DraftDetailsForm extends Component {
         </Row>
       </FormGroup>
       <FormGroup>
+        {/* <Label htmlFor="csvFile">Add CSV File</Label>
+          <Input type="file" name="csvFile" id="csvFileId" /> */}
         <Label htmlFor="csvFile">Add CSV File</Label>
-          <Input type="file" name="csvFile" id="csvFileId" />
+        <CustomInput type="file" id="csvFileId" name="csvFile" />
         <FormText color="muted">
           Please add a CSV file containing a list of the names of players who have signed up for your league.
         </FormText>
