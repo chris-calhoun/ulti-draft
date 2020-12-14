@@ -8,9 +8,9 @@ import {
   Label,
   Input,
   FormText,
-  CustomInput,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
+import { CSVReader } from 'react-papaparse';
 import StateDropdown from '../Dropdown/stateDropdown';
 import TeamsDropdown from '../Dropdown/numTeamsDropdown';
 import AuthData from '../../helpers/data/authData';
@@ -80,6 +80,23 @@ class DraftDetailsForm extends Component {
     });
   }
 
+  // papa-parse
+  handleOnDrop = (data) => {
+    console.warn('---------------------------');
+    console.warn(data);
+    console.warn('---------------------------');
+  }
+
+  handleOnError = (err, file, inputElem, reason) => {
+    console.warn(err);
+  }
+
+  handleOnRemoveFile = (data) => {
+    console.warn('---------------------------');
+    console.warn(data);
+    console.warn('---------------------------');
+  }
+
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -142,10 +159,17 @@ class DraftDetailsForm extends Component {
         </Row>
       </FormGroup>
       <FormGroup>
-        {/* <Label htmlFor="csvFile">Add CSV File</Label>
-          <Input type="file" name="csvFile" id="csvFileId" /> */}
-        <Label htmlFor="csvFile">Add CSV File</Label>
-        <CustomInput type="file" id="csvFileId" name="csvFile" />
+        <CSVReader
+          onDrop={this.handleOnDrop}
+          onError={this.handleOnError}
+          noDrag
+          style={{}}
+          config={{ header: true }}
+          addRemoveButton
+          onRemoveFile={this.handleOnRemoveFile}
+        >
+          <span>Click to Upload</span>
+        </CSVReader>
         <FormText color="muted">
           Please add a CSV file containing a list of the names of players who have signed up for your league.
         </FormText>
