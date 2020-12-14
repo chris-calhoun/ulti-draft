@@ -21,8 +21,9 @@ class CaptainsForm extends Component {
   };
 
   componentDidMount() {
-    const numberOfTeams = this.props.numTeams;
-    const leagueFireBK = this.props.leagueFBKey;
+    const { numTeams, fbKey } = this.props.location.state.leagueObj;
+    const numberOfTeams = numTeams;
+    const leagueFireBK = fbKey;
     this.setState({
       numberOfTeams,
       leagueFireBK,
@@ -30,9 +31,10 @@ class CaptainsForm extends Component {
   }
 
   navigateToDraft = () => {
-    const { history, leagueFBKey } = this.props;
+    const { history } = this.props;
+    const { leagueFireBK } = this.state;
     if (history) {
-      history.push(`/active-draft/${leagueFBKey}`);
+      history.push(`/active-draft/${leagueFireBK}`);
     }
   }
 
