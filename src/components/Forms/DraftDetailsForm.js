@@ -30,6 +30,7 @@ class DraftDetailsForm extends Component {
     userId: '',
     zipcode: '',
     numTeams: '',
+    playerData: [],
   }
 
   componentDidMount() {
@@ -82,9 +83,10 @@ class DraftDetailsForm extends Component {
 
   // papa-parse
   handleOnDrop = (data) => {
-    console.warn('---------------------------');
-    console.warn(data);
-    console.warn('---------------------------');
+    // console.warn(data);
+    this.setState({
+      playerData: data,
+    });
   }
 
   handleOnError = (err, file, inputElem, reason) => {
