@@ -101,7 +101,7 @@ class DraftDetailsForm extends Component {
 
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} className="mb-5">
       <Row form>
         <Col>
           <FormGroup>
