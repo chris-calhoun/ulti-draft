@@ -17,6 +17,10 @@ I absolutely love the sport of ultimate frisbee. I have been playing for 8 years
 - React
 - SASS
 
+## Deployed Site
+
+Check out a demo of the site [here](https://ultimate-draft.netlify.app/).
+
 ## Project Planning Video
 
 Check out my overview of the project planning [here](https://www.loom.com/share/46a6a6364fd14b8297abad4aae8a274d).
