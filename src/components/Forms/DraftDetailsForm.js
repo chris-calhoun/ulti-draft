@@ -15,21 +15,24 @@ import StateDropdown from '../Dropdown/stateDropdown';
 import TeamsDropdown from '../Dropdown/numTeamsDropdown';
 import AuthData from '../../helpers/data/authData';
 import LeagueData from '../../helpers/data/leagueData';
+import PlayerData from '../../helpers/data/playerData';
 
 const DatePicker = require('reactstrap-date-picker');
 
 class DraftDetailsForm extends Component {
   state = {
-    firebaseKey: '',
-    city: '',
-    state: '',
-    startDate: new Date().toISOString(),
-    endDate: new Date().toISOString(),
-    fieldAddress: '',
-    leagueName: '',
-    userId: '',
-    zipcode: '',
-    numTeams: '',
+    leagueObj: {
+      firebaseKey: '',
+      city: '',
+      state: '',
+      startDate: new Date().toISOString(),
+      endDate: new Date().toISOString(),
+      fieldAddress: '',
+      leagueName: '',
+      userId: '',
+      zipcode: '',
+      numTeams: '',
+    },
     playerData: [],
   }
 
@@ -61,8 +64,12 @@ class DraftDetailsForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    LeagueData.createLeague(this.state).then((response) => {
+    const { playerData } = this.state;
+    LeagueData.createLeague(this.state.leagueObj).then((response) => {
       // console.warn(response.data.firebaseKey);
+      playerData.forEach((player) => {
+        PlayerData.createPlayer(playerData);
+      });
       this.navigateToCaptainsForm(response.data.firebaseKey);
     });
   }
