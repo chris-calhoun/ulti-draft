@@ -1,5 +1,6 @@
+import Rebase from 're-base';
+import firebase from 'firebase';
 import React, { Component } from 'react';
-import { base } from '../../helpers/data/connection';
 
 export default class ActiveDraft extends Component {
 state = {
@@ -9,6 +10,7 @@ state = {
 
 componentDidMount() {
   const draftCode = this.props.match.params.id;
+  const base = Rebase.createClass(firebase.database());
   this.ref = base.syncState('/Player', {
     context: this,
     state: 'players',
