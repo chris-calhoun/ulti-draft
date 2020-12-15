@@ -73,15 +73,10 @@ class DraftDetailsForm extends Component {
     e.preventDefault();
     const { playerData } = this.state;
     LeagueData.createLeague(this.state.leagueObj).then((response) => {
-      // console.warn(response.data.firebaseKey);
-
-      // this is definitely not the most elegant way to handle this problem
-      // for (let i = 0; i < playerData.length; i + 1) {
-      //   PlayerData.createPlayer(playerData);
-      // }
-
       playerData.forEach((player) => {
-        PlayerData.createPlayer(player);
+        const currentPlayer = player;
+        currentPlayer.data.leagueId = response.data.firebaseKey;
+        PlayerData.createPlayer(currentPlayer);
       });
       this.navigateToCaptainsForm(response.data.firebaseKey);
     });

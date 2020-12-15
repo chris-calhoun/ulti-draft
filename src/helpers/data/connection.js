@@ -1,5 +1,6 @@
-import firebase from 'firebase/app';
+import firebase from 'firebase';
 import firebaseConfig from '../apiKeys';
+// import 'firebase/database';
 
 const firebaseApp = () => {
   if (!firebase.apps.length) {
