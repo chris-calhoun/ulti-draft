@@ -12,9 +12,9 @@ export default class ActiveDraft extends Component {
 state = {
   draftCode: '',
   players: {},
-  arrDraftCaptains: {},
   activeCaptain: '',
   base: {},
+  arrCaptains: {},
 }
 
 componentDidMount() {
@@ -27,30 +27,26 @@ componentDidMount() {
     queries: {
       orderByChild: 'leagueId',
       equalTo: `${draftCode}`,
-      arrCaptains: {},
     },
   });
 
-// get league teams
-
-this.getLeagueTeamInfo(draftCode)
-  .then((response) => {
-    this.setState({
-      arrCaptains: response,
-      draftCode,
-      base,
-      // arrDraftCaptains: arrCaptains,
+  // get league teams
+  this.getLeagueTeamInfo(draftCode)
+    .then((response) => {
+      this.setState({
+        arrCaptains: response,
+        draftCode,
+        base,
+      });
     });
-  })
-
-
 }
 
 getLeagueTeamInfo = (leagueKey) => (
   LeagueTeamsData.getLeagueTeams(leagueKey).then((response) => {
+    console.warn(response);
     const teamArray = [];
     response.forEach((team) => {
-      teamArray.push(TeamData.getTeam(team.Key));;
+      teamArray.push(TeamData.getTeam(team.teamKey));
     });
     // returning an array of all the fulfilled promises
     return Promise.all(teamArray);
