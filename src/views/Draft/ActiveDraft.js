@@ -11,11 +11,12 @@ state = {
   draftCode: '',
   players: {},
   arrDraftCaptains: {},
+  activeCaptain: '',
 }
 
 componentDidMount() {
   const draftCode = this.props.match.params.id;
-  const { arrCaptains } = this.props.location.state;
+  // const { arrCaptains } = this.props.location.state;
   const base = Rebase.createClass(firebase.database());
   this.ref = base.syncState('/Player', {
     context: this,
@@ -28,7 +29,7 @@ componentDidMount() {
 
   this.setState({
     draftCode,
-    arrDraftCaptains: arrCaptains,
+    // arrDraftCaptains: arrCaptains,
   });
 }
 
