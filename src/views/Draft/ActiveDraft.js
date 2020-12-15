@@ -12,12 +12,14 @@ state = {
   players: {},
   arrDraftCaptains: {},
   activeCaptain: '',
+  base: {},
 }
 
 componentDidMount() {
   const draftCode = this.props.match.params.id;
   // const { arrCaptains } = this.props.location.state;
   const base = Rebase.createClass(firebase.database());
+  // console.warn(base);
   this.ref = base.syncState('/Player', {
     context: this,
     state: 'players',
@@ -29,8 +31,14 @@ componentDidMount() {
 
   this.setState({
     draftCode,
+    base,
     // arrDraftCaptains: arrCaptains,
   });
+}
+
+// need in order to prevent memory leak
+componentWillUnmount() {
+  this.state.base.removeBinding(this.ref);
 }
 
 render() {
