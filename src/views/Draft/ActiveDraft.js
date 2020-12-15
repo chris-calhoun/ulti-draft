@@ -14,6 +14,10 @@ componentDidMount() {
   this.ref = base.syncState('/Player', {
     context: this,
     state: 'players',
+    queries: {
+      orderByChild: 'gender',
+      equalTo: 'female',
+    },
   });
 
   this.setState({
