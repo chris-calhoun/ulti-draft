@@ -81,13 +81,13 @@ render() {
         <tbody>
             <>
             {Object.values(this.state.players).map((player) => (
-              <tr>
-                <td>{player.first_name}</td>
-                <td>{player.last_name}</td>
-                <td>{player.age}</td>
-                <td>{player.gender}</td>
-                <td><Button onClick={this.handleAddPlayerButton}>Add</Button></td>
-              </tr>
+                <tr>
+                  <td>{player.first_name}</td>
+                  <td>{player.last_name}</td>
+                  <td>{player.age}</td>
+                  <td>{player.gender}</td>
+                  <td><Button onClick={this.handleAddPlayerButton}>Add</Button></td>
+                </tr>
             ))}
             </>
         </tbody>
