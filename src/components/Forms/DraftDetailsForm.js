@@ -72,10 +72,12 @@ class DraftDetailsForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { playerData } = this.state;
+
     LeagueData.createLeague(this.state.leagueObj).then((response) => {
       playerData.forEach((player) => {
         const currentPlayer = player;
         currentPlayer.data.leagueId = response.data.firebaseKey;
+        currentPlayer.data.available = true;
         PlayerData.createPlayer(currentPlayer);
       });
       this.navigateToCaptainsForm(response.data.firebaseKey);

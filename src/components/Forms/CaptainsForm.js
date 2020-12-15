@@ -34,7 +34,12 @@ class CaptainsForm extends Component {
     const { history } = this.props;
     const { leagueFireBK } = this.state;
     if (history) {
-      history.push(`/active-draft/${leagueFireBK}`);
+      history.push({
+        pathname: `/active-draft/${leagueFireBK}`,
+        state: {
+          arrCaptains: this.state.arrCaptains,
+        },
+      });
     }
   }
 
