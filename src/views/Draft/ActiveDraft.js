@@ -15,8 +15,8 @@ componentDidMount() {
     context: this,
     state: 'players',
     queries: {
-      orderByChild: 'gender',
-      equalTo: 'female',
+      orderByChild: 'leagueId',
+      equalTo: `${draftCode}`,
     },
   });
 
