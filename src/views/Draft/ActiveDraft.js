@@ -43,7 +43,7 @@ componentDidMount() {
 
 getLeagueTeamInfo = (leagueKey) => (
   LeagueTeamsData.getLeagueTeams(leagueKey).then((response) => {
-    console.warn(response);
+    // console.warn(response);
     const teamArray = [];
     response.forEach((team) => {
       teamArray.push(TeamData.getTeam(team.teamKey));
@@ -55,6 +55,9 @@ getLeagueTeamInfo = (leagueKey) => (
 
 handleAddPlayerButton = () => {
   console.warn('add button clicked');
+  // change player available property to false.
+
+  // create team-playerJoin Node
 }
 
 // need in order to prevent memory leak
@@ -80,6 +83,7 @@ render() {
         </thead>
         <tbody>
             <>
+            {/* filter players by whether or not they are available and then render on DOM */}
             {Object.values(this.state.players).filter((player) => (
               player.available === true
             )).map((player) => (
