@@ -10,10 +10,12 @@ export default class ActiveDraft extends Component {
 state = {
   draftCode: '',
   players: {},
+  arrDraftCaptains: {},
 }
 
 componentDidMount() {
   const draftCode = this.props.match.params.id;
+  const { arrCaptains } = this.props.location.state;
   const base = Rebase.createClass(firebase.database());
   this.ref = base.syncState('/Player', {
     context: this,
@@ -26,6 +28,7 @@ componentDidMount() {
 
   this.setState({
     draftCode,
+    arrDraftCaptains: arrCaptains,
   });
 }
 
