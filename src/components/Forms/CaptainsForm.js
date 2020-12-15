@@ -30,11 +30,31 @@ class CaptainsForm extends Component {
     });
   }
 
+  // navigateToCaptainsForm = (fbKey) => {
+  //   const { history } = this.props;
+  //   if (history) {
+  //     history.push({
+  //       pathname: './captains',
+  //       state: {
+  //         leagueObj: {
+  //           numTeams: parseInt(this.state.leagueObj.numTeams, 10),
+  //           fbKey,
+  //         },
+  //       },
+  //     });
+  //   }
+  // }
+
   navigateToDraft = () => {
     const { history } = this.props;
     const { leagueFireBK } = this.state;
     if (history) {
-      history.push(`/active-draft/${leagueFireBK}`);
+      history.push({
+        pathname: `/active-draft/${leagueFireBK}`,
+        state: {
+          arrCaptains: this.state.arrCaptains,
+        },
+      });
     }
   }
 

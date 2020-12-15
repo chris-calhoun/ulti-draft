@@ -34,7 +34,7 @@ render() {
     <div>
       <h1>Active Draft</h1>
       <p>Draft Code: {this.state.draftCode}</p>
-      <div class="d-flex justify-content-center mx-5 my-5">
+      <div className="d-flex justify-content-center mx-5 my-5">
         <Table>
         <thead>
           <tr>
