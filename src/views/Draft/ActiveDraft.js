@@ -80,7 +80,9 @@ render() {
         </thead>
         <tbody>
             <>
-            {Object.values(this.state.players).map((player) => (
+            {Object.values(this.state.players).filter((player) => (
+              player.available === true
+            )).map((player) => (
                 <tr>
                   <td>{player.first_name}</td>
                   <td>{player.last_name}</td>
