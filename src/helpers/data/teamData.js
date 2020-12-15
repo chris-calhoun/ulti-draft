@@ -13,5 +13,11 @@ const createTeam = (team) => new Promise((resolve, reject) => {
   // });
 });
 
+const getTeam = (teamId) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/Team/${teamId}.json`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
+
 // eslint-disable-next-line
-export default { createTeam };
+export default { createTeam, getTeam };

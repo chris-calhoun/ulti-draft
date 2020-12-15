@@ -8,5 +8,12 @@ const createLeagueTeamJoin = (teamKey, leagueKey) => new Promise((resolve, rejec
     .catch((error) => reject(error));
 });
 
+const getLeagueTeams = (leagueKey) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/LeagueTeams.json?orderBy="leagueKey"&equalTo="${leagueKey}"`).then(
+    (response) => {
+      resolve(object.values(response.data));
+    }).catch((error) => reject(error));
+});
+
 // eslint-disable-next-line
-export default { createLeagueTeamJoin };
+export default { createLeagueTeamJoin, getLeagueTeams };

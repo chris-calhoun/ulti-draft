@@ -5,6 +5,8 @@ import {
   Table,
   Button,
 } from 'reactstrap';
+import LeagueTeamsData from '../../helpers/data/leagueTeamsData';
+import TeamData from '../../helpers/data/teamData';
 
 export default class ActiveDraft extends Component {
 state = {
@@ -17,24 +19,43 @@ state = {
 
 componentDidMount() {
   const draftCode = this.props.match.params.id;
-  // const { arrCaptains } = this.props.location.state;
   const base = Rebase.createClass(firebase.database());
-  // console.warn(base);
+
   this.ref = base.syncState('/Player', {
     context: this,
     state: 'players',
     queries: {
       orderByChild: 'leagueId',
       equalTo: `${draftCode}`,
+      arrCaptains: {},
     },
   });
 
-  this.setState({
-    draftCode,
-    base,
-    // arrDraftCaptains: arrCaptains,
-  });
+// get league teams
+
+this.getLeagueTeamInfo(draftCode)
+  .then((response) => {
+    this.setState({
+      arrCaptains: response,
+      draftCode,
+      base,
+      // arrDraftCaptains: arrCaptains,
+    });
+  })
+
+
 }
+
+getLeagueTeamInfo = (leagueKey) => (
+  LeagueTeamsData.getLeagueTeams(leagueKey).then((response) => {
+    const teamArray = [];
+    response.forEach((team) => {
+      teamArray.push(TeamData.getTeam(team.Key));;
+    });
+    // returning an array of all the fulfilled promises
+    return Promise.all(teamArray);
+  })
+)
 
 // need in order to prevent memory leak
 componentWillUnmount() {
