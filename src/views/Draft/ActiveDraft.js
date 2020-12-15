@@ -7,12 +7,13 @@ import {
 } from 'reactstrap';
 import LeagueTeamsData from '../../helpers/data/leagueTeamsData';
 import TeamData from '../../helpers/data/teamData';
+import TeamPlayersData from '../../helpers/data/TeamPlayersData';
 
 export default class ActiveDraft extends Component {
 state = {
   draftCode: '',
   players: {},
-  activeCaptain: '',
+  activeTeamId: '-MObnqj2MSQEVoxiSPz6',
   base: {},
   arrCaptains: {},
 }
@@ -53,11 +54,14 @@ getLeagueTeamInfo = (leagueKey) => (
   })
 )
 
-handleAddPlayerButton = () => {
+handleAddPlayerButton = (playerId) => {
   console.warn('add button clicked');
-  // change player available property to false.
+  const { activeTeamId } = this.state;
 
-  // create team-playerJoin Node
+  // create team-player join node
+  TeamPlayersData.createTeamPlayerJoin(activeTeamId, playerId);
+
+  // change player available property to false.
 }
 
 // need in order to prevent memory leak
@@ -92,7 +96,7 @@ render() {
                   <td>{player.last_name}</td>
                   <td>{player.age}</td>
                   <td>{player.gender}</td>
-                  <td><Button onClick={this.handleAddPlayerButton}>Add</Button></td>
+                  <td><Button onClick={() => { this.handleAddPlayerButton(player.id); }}>Add</Button></td>
                 </tr>
             ))}
             </>
