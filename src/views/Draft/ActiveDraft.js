@@ -53,6 +53,10 @@ getLeagueTeamInfo = (leagueKey) => (
   })
 )
 
+handleAddPlayerButton = () => {
+  console.warn('add button clicked');
+}
+
 // need in order to prevent memory leak
 componentWillUnmount() {
   this.state.base.removeBinding(this.ref);
@@ -82,7 +86,7 @@ render() {
                 <td>{player.last_name}</td>
                 <td>{player.age}</td>
                 <td>{player.gender}</td>
-                <td><Button>Add</Button></td>
+                <td><Button onClick={this.handleAddPlayerButton}>Add</Button></td>
               </tr>
             ))}
             </>
