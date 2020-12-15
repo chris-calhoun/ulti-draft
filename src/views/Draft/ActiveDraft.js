@@ -55,13 +55,20 @@ getLeagueTeamInfo = (leagueKey) => (
 )
 
 handleAddPlayerButton = (playerId) => {
-  console.warn('add button clicked');
-  const { activeTeamId } = this.state;
+  // console.warn('add button clicked');
+  const { activeTeamId, players } = this.state;
 
   // create team-player join node
-  TeamPlayersData.createTeamPlayerJoin(activeTeamId, playerId);
-
-  // change player available property to false.
+  TeamPlayersData.createTeamPlayerJoin(activeTeamId, playerId).then(() => {
+    // change player available property to false.
+    const playersCopy = { ...players };
+    const playerCopy = { ...players[playerId] };
+    playerCopy.available = false;
+    playersCopy[playerId] = playerCopy;
+    this.setState({
+      players: playersCopy,
+    });
+  });
 }
 
 // need in order to prevent memory leak
