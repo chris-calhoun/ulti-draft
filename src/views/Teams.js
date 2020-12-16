@@ -40,7 +40,7 @@ export default class Teams extends Component {
     return (
       <div>
         <h1>Teams</h1>
-        <div className='d-flex flex-wrap container'>
+        <div className='d-flex flex-wrap container justify-content-center'>
           {renderTeams()}
         </div>
       </div>
