@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function LeaguesCard({ league }) {
   return (
@@ -9,8 +10,9 @@ export default function LeaguesCard({ league }) {
         <p className='card-text'>End Date: {league.endDateF}</p>
         <p className='card-text'>Field Address: {league.fieldAddress}</p>
         <p className='card-text'>{league.city}, {league.state} {league.zipcode}</p>
-
-        <button id={league.firebaseKey} className='btn btn-success'>View Teams</button>
+        <Link className='btn btn-primary' color="success" to={`/teams/${league.firebaseKey}`}>
+          View Teams
+        </Link>
         {/* <button id={league.firebaseKey} onClick={onDelete} className='btn btn-danger'>Delete</button> */}
       </div>
     </div>

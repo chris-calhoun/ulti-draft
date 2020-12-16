@@ -32,8 +32,8 @@ export default function Routes({ authed }) {
         component={() => <Leagues authed={authed}/>}
       />
       <Route
-        exact path='/teams'
-        component={() => <Teams authed={authed}/>}
+        exact path='/teams/:id'
+        component={(props) => <Teams authed={authed} {...props}/>}
       />
       <Route component={NotFound} />
     </Switch>
