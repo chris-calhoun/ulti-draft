@@ -9,14 +9,12 @@ export default class Teams extends Component {
   };
 
   componentDidMount() {
-    // 1. pull boardId from URL params
+    // 1. pull leagueId from URL params
     const leagueId = this.props.match.params.id;
 
-    // 1. Make a call to the API that returns the pins associated with this board and set to state.
+    // 1. Make a call to the API that returns the teams associated with this league and set to state.
     this.getTeams(leagueId)
       .then((resp) => {
-        // console.warn(boardId);
-        // console.warn(resp);
         this.setState({ teams: resp });
       });
   }
@@ -32,17 +30,16 @@ export default class Teams extends Component {
   )
 
   render() {
-    const { teams } = this.state;
-    const renderTeams = () => (
-      teams.map((team) => (
-        <TeamCard key={team.firebaseKey} team={team} />
-      ))
-    );
+    // const { teams } = this.state;
+    // const renderTeams = () => (
+    //   teams.map((team) => (
+    //     <TeamCard key={team.teamKey} team={team} />
+    //   ))
+    // );
     return (
       <div>
         <h1>Teams</h1>
         <div className='d-flex flex-wrap container'>
-          {renderTeams()}
         </div>
       </div>
     );
