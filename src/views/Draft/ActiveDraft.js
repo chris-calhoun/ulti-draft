@@ -31,6 +31,7 @@ componentDidMount() {
     base,
   });
 
+  // sync list of players
   this.ref = base.syncState('/Player', {
     context: this,
     state: 'players',
@@ -40,13 +41,20 @@ componentDidMount() {
     },
   });
 
+  // sync active team
   this.teams = base.syncState('/LeagueTeams', {
     context: this,
     state: 'leagueTeams',
     queries: {
-      orderByChild: 'isActive',
-      equalTo: true,
+      orderByChild: 'leagueKey',
+      equalTo: `${draftCode}`,
     },
+  });
+
+  // sync active league
+  this.teams = base.syncState(`/League/${draftCode}/isActive`, {
+    context: this,
+    state: 'draftStarted',
   });
 }
 
@@ -68,7 +76,6 @@ getLeagueTeamInfo = (leagueKey) => (
       console.warn(resp);
       this.setState({
         arrCaptains: resp,
-        isLoading: false,
       });
     });
   })
