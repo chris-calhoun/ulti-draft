@@ -1,5 +1,6 @@
 import React from 'react';
 import { Jumbotron, Button } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 const DraftComplete = () => (
     <div>
@@ -8,7 +9,9 @@ const DraftComplete = () => (
         <p className="lead">Thanks for joining and good luck this season!</p>
         <hr className="my-2" />
         <p className="lead">
-          <Button color="primary">Exit Draft</Button>
+        <Link to = "/">
+          <Button color="success">Exit Draft</Button>
+        </Link>
         </p>
       </Jumbotron>
     </div>
