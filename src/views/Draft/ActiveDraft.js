@@ -8,6 +8,7 @@ import {
 import LeagueTeamsData from '../../helpers/data/leagueTeamsData';
 import TeamData from '../../helpers/data/teamData';
 import TeamPlayersData from '../../helpers/data/TeamPlayersData';
+import DraftQueue from './DraftQueue';
 
 export default class ActiveDraft extends Component {
 state = {
@@ -16,6 +17,7 @@ state = {
   activeTeamId: '-MObnqj2MSQEVoxiSPz6',
   base: {},
   arrCaptains: [],
+  draftStarted: false,
 }
 
 componentDidMount() {
@@ -41,6 +43,9 @@ componentDidMount() {
 handleStartButton = (e) => {
   e.preventDefault();
   this.getLeagueTeamInfo(this.state.draftCode);
+  this.setState({
+    draftStarted: true,
+  });
 }
 
 getLeagueTeamInfo = (leagueKey) => (
@@ -82,11 +87,30 @@ componentWillUnmount() {
 }
 
 render() {
+  const { draftStarted } = this.state;
+  let showStartButton;
+  let showQueue;
+  switch (draftStarted) {
+    case false:
+      showStartButton = (
+        <Button onClick={(e) => this.handleStartButton(e)}>Start</Button>
+      );
+      break;
+    case true:
+      showQueue = (
+        <DraftQueue />
+      );
+      break;
+    default:
+      console.warn('draftStarted state not found.');
+  }
+
   return (
     <div>
       <h1>Active Draft</h1>
       <p>Draft Code: {this.state.draftCode}</p>
-      <Button onClick={(e) => this.handleStartButton(e)}>Start</Button>
+      {showStartButton}
+      {showQueue}
       <div className="d-flex justify-content-center mx-5 my-5">
         <Table>
         <thead>
