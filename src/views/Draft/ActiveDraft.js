@@ -25,7 +25,6 @@ componentDidMount() {
   const draftCode = this.props.match.params.id;
   const base = Rebase.createClass(firebase.database());
 
-  // get league teams
   this.setState({
     draftCode,
     base,
@@ -42,7 +41,7 @@ componentDidMount() {
   });
 
   // sync active team
-  this.teams = base.syncState('/LeagueTeams', {
+  this.leagueTeams = base.syncState('/LeagueTeams', {
     context: this,
     state: 'leagueTeams',
     queries: {
@@ -52,7 +51,7 @@ componentDidMount() {
   });
 
   // sync active league
-  this.teams = base.syncState(`/League/${draftCode}/isActive`, {
+  this.league = base.syncState(`/League/${draftCode}/isActive`, {
     context: this,
     state: 'draftStarted',
   });
