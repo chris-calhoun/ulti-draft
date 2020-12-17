@@ -16,7 +16,7 @@ state = {
   players: {},
   activeTeamId: '-MObnqj2MSQEVoxiSPz6',
   base: {},
-  isLoading: true,
+  isLoading: false,
   arrCaptains: null,
 }
 
@@ -34,11 +34,16 @@ componentDidMount() {
   });
 
   // get league teams
-  this.getLeagueTeamInfo(draftCode);
   this.setState({
     draftCode,
     base,
+    loading: false,
   });
+}
+
+handleStartButton = (e) => {
+  e.preventDefault();
+  this.getLeagueTeamInfo(this.state.draftCode);
 }
 
 getLeagueTeamInfo = (leagueKey) => (
@@ -47,12 +52,12 @@ getLeagueTeamInfo = (leagueKey) => (
     const teamArray = [];
     response.forEach((team) => (teamArray.push(TeamData.getTeam(team.teamKey))));
     // returning an array of all the fulfilled promises
-    return Promise.all(teamArray);
-  }).then((resp) => {
-    console.warn(resp);
-    this.setState({
-      arrCaptains: resp,
-      isLoading: false,
+    Promise.all(teamArray).then((resp) => {
+      console.warn(resp);
+      this.setState({
+        arrCaptains: resp,
+        isLoading: false,
+      });
     });
   })
 )
@@ -89,6 +94,7 @@ render() {
     <div>
       <h1>Active Draft</h1>
       <p>Draft Code: {this.state.draftCode}</p>
+      <Button onClick={(e) => this.handleStartButton(e)}>Start</Button>
       <div className="d-flex justify-content-center mx-5 my-5">
         <Table>
         <thead>
