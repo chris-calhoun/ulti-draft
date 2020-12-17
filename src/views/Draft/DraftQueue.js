@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 
 export default class DraftQueue extends Component {
   render() {
+    const { activeCaptain } = this.props;
     return (
       <div>
-        <h2>Draft Queue goes here</h2>
+        <p>Active Captain: {activeCaptain}</p>
       </div>
     );
   }

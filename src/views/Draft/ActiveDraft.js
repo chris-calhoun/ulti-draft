@@ -15,6 +15,7 @@ state = {
   draftCode: '',
   players: {},
   leagueTeams: {},
+  activeCaptain: 'Chris',
   activeTeamId: '-MObnqj2MSQEVoxiSPz6',
   base: {},
   arrCaptains: [],
@@ -100,10 +101,12 @@ handleAddPlayerButton = (playerId) => {
 // need in order to prevent memory leak
 componentWillUnmount() {
   this.state.base.removeBinding(this.ref);
+  this.state.base.removeBinding(this.leagueTeams);
+  this.state.base.removeBinding(this.league);
 }
 
 render() {
-  const { draftStarted } = this.state;
+  const { draftStarted, activeCaptain } = this.state;
   let showStartButton;
   let showQueue;
   switch (draftStarted) {
@@ -114,7 +117,7 @@ render() {
       break;
     case true:
       showQueue = (
-        <DraftQueue />
+        <DraftQueue activeCaptain={activeCaptain}/>
       );
       break;
     default:
