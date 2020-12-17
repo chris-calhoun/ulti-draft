@@ -3,7 +3,7 @@ import axios from 'axios';
 const baseUrl = 'https://ulti-draft-default-rtdb.firebaseio.com/';
 
 const createLeagueTeamJoin = (teamKey, leagueKey) => new Promise((resolve, reject) => {
-  axios.post(`${baseUrl}/LeagueTeams.json`, { teamKey, leagueKey })
+  axios.post(`${baseUrl}/LeagueTeams.json`, { teamKey, leagueKey, isActive: false })
     .then((response) => {
       (resolve(response.data));
     }).catch((error) => reject(error));

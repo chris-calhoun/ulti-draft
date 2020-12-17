@@ -14,6 +14,7 @@ export default class ActiveDraft extends Component {
 state = {
   draftCode: '',
   players: {},
+  leagueTeams: {},
   activeTeamId: '-MObnqj2MSQEVoxiSPz6',
   base: {},
   arrCaptains: [],
@@ -36,6 +37,15 @@ componentDidMount() {
     queries: {
       orderByChild: 'leagueId',
       equalTo: `${draftCode}`,
+    },
+  });
+
+  this.teams = base.syncState('/LeagueTeams', {
+    context: this,
+    state: 'leagueTeams',
+    queries: {
+      orderByChild: 'isActive',
+      equalTo: true,
     },
   });
 }
