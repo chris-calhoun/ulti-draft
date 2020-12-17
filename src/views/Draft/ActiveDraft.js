@@ -8,7 +8,6 @@ import {
 import LeagueTeamsData from '../../helpers/data/leagueTeamsData';
 import TeamData from '../../helpers/data/teamData';
 import TeamPlayersData from '../../helpers/data/TeamPlayersData';
-import Loader from '../../components/Loader/index';
 
 export default class ActiveDraft extends Component {
 state = {
@@ -16,13 +15,18 @@ state = {
   players: {},
   activeTeamId: '-MObnqj2MSQEVoxiSPz6',
   base: {},
-  isLoading: false,
-  arrCaptains: null,
+  arrCaptains: [],
 }
 
 componentDidMount() {
   const draftCode = this.props.match.params.id;
   const base = Rebase.createClass(firebase.database());
+
+  // get league teams
+  this.setState({
+    draftCode,
+    base,
+  });
 
   this.ref = base.syncState('/Player', {
     context: this,
@@ -31,13 +35,6 @@ componentDidMount() {
       orderByChild: 'leagueId',
       equalTo: `${draftCode}`,
     },
-  });
-
-  // get league teams
-  this.setState({
-    draftCode,
-    base,
-    loading: false,
   });
 }
 
@@ -85,12 +82,7 @@ componentWillUnmount() {
 }
 
 render() {
-  const { isLoading } = this.state;
   return (
-    <>
-     { isLoading ? (
-          <Loader />
-     ) : (
     <div>
       <h1>Active Draft</h1>
       <p>Draft Code: {this.state.draftCode}</p>
@@ -125,8 +117,6 @@ render() {
       </Table>
     </div>
     </div>
-     )}
-    </>
   );
 }
 }
