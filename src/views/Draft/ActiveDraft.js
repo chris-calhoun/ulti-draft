@@ -9,6 +9,7 @@ import LeagueTeamsData from '../../helpers/data/leagueTeamsData';
 import TeamData from '../../helpers/data/teamData';
 import TeamPlayersData from '../../helpers/data/TeamPlayersData';
 import DraftQueue from './DraftQueue';
+import DraftComplete from './DraftComplete';
 
 export default class ActiveDraft extends Component {
 state = {
@@ -109,6 +110,8 @@ render() {
   const { draftStarted, activeCaptain } = this.state;
   let showStartButton;
   let showQueue;
+  const remainingPlayers = Object.values(this.state.players).filter((player) => (player.available === true)).length;
+
   switch (draftStarted) {
     case false:
       showStartButton = (
@@ -131,6 +134,11 @@ render() {
       {showStartButton}
       {showQueue}
       <div className="d-flex justify-content-center mx-5 my-5">
+      { remainingPlayers === 0 ? (
+          <>
+            <DraftComplete />
+          </>
+      ) : (
         <Table>
         <thead>
           <tr>
@@ -141,7 +149,8 @@ render() {
             <th>Add Player</th>
           </tr>
         </thead>
-        <tbody>
+
+          <tbody>
             <>
             {/* filter players by whether or not they are available and then render on DOM */}
             {Object.values(this.state.players).filter((player) => (
@@ -156,8 +165,10 @@ render() {
                 </tr>
             ))}
             </>
-        </tbody>
+          </tbody>
       </Table>
+      )
+            }
     </div>
     </div>
   );
