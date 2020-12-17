@@ -8,6 +8,7 @@ import {
 import LeagueTeamsData from '../../helpers/data/leagueTeamsData';
 import TeamData from '../../helpers/data/teamData';
 import TeamPlayersData from '../../helpers/data/TeamPlayersData';
+import Loader from '../../components/Loader/index';
 
 export default class ActiveDraft extends Component {
 state = {
@@ -15,7 +16,8 @@ state = {
   players: {},
   activeTeamId: '-MObnqj2MSQEVoxiSPz6',
   base: {},
-  arrCaptains: {},
+  isLoading: true,
+  arrCaptains: null,
 }
 
 componentDidMount() {
@@ -32,25 +34,26 @@ componentDidMount() {
   });
 
   // get league teams
-  this.getLeagueTeamInfo(draftCode)
-    .then((response) => {
-      this.setState({
-        arrCaptains: response,
-        draftCode,
-        base,
-      });
-    });
+  this.getLeagueTeamInfo(draftCode);
+  this.setState({
+    draftCode,
+    base,
+  });
 }
 
 getLeagueTeamInfo = (leagueKey) => (
   LeagueTeamsData.getLeagueTeams(leagueKey).then((response) => {
     // console.warn(response);
     const teamArray = [];
-    response.forEach((team) => {
-      teamArray.push(TeamData.getTeam(team.teamKey));
-    });
+    response.forEach((team) => (teamArray.push(TeamData.getTeam(team.teamKey))));
     // returning an array of all the fulfilled promises
     return Promise.all(teamArray);
+  }).then((resp) => {
+    console.warn(resp);
+    this.setState({
+      arrCaptains: resp,
+      isLoading: false,
+    });
   })
 )
 
@@ -77,7 +80,12 @@ componentWillUnmount() {
 }
 
 render() {
+  const { isLoading } = this.state;
   return (
+    <>
+     { isLoading ? (
+          <Loader />
+     ) : (
     <div>
       <h1>Active Draft</h1>
       <p>Draft Code: {this.state.draftCode}</p>
@@ -111,6 +119,8 @@ render() {
       </Table>
     </div>
     </div>
+     )}
+    </>
   );
 }
 }

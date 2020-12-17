@@ -18,7 +18,7 @@ const AppModal = (props) => {
 
   return (
     <div>
-      <Button color="success" onClick={toggle} className="mt-2">{buttonLabel}</Button>
+      <Button color="success" onClick={toggle} className="mt-2 btn-block">{buttonLabel}</Button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
       <ModalHeader toggle={toggle}>{title}</ModalHeader>
         <ModalBody>{props.children}</ModalBody>
