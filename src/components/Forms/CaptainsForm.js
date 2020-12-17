@@ -91,7 +91,7 @@ class CaptainsForm extends Component {
 
   render() {
     const showCaptains = () => (
-      this.state.arrCaptains.map((captain) => <p>{captain.teamCaptain}</p>)
+      this.state.arrCaptains.map((captain, key) => <p key={key}>{captain.teamCaptain}</p>)
     );
 
     const { addOrSubmit } = this.state;

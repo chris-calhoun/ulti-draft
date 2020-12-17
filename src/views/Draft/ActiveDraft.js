@@ -15,12 +15,18 @@ state = {
   players: {},
   activeTeamId: '-MObnqj2MSQEVoxiSPz6',
   base: {},
-  arrCaptains: {},
+  arrCaptains: [],
 }
 
 componentDidMount() {
   const draftCode = this.props.match.params.id;
   const base = Rebase.createClass(firebase.database());
+
+  // get league teams
+  this.setState({
+    draftCode,
+    base,
+  });
 
   this.ref = base.syncState('/Player', {
     context: this,
@@ -30,27 +36,26 @@ componentDidMount() {
       equalTo: `${draftCode}`,
     },
   });
+}
 
-  // get league teams
-  this.getLeagueTeamInfo(draftCode)
-    .then((response) => {
-      this.setState({
-        arrCaptains: response,
-        draftCode,
-        base,
-      });
-    });
+handleStartButton = (e) => {
+  e.preventDefault();
+  this.getLeagueTeamInfo(this.state.draftCode);
 }
 
 getLeagueTeamInfo = (leagueKey) => (
   LeagueTeamsData.getLeagueTeams(leagueKey).then((response) => {
     // console.warn(response);
     const teamArray = [];
-    response.forEach((team) => {
-      teamArray.push(TeamData.getTeam(team.teamKey));
-    });
+    response.forEach((team) => (teamArray.push(TeamData.getTeam(team.teamKey))));
     // returning an array of all the fulfilled promises
-    return Promise.all(teamArray);
+    Promise.all(teamArray).then((resp) => {
+      console.warn(resp);
+      this.setState({
+        arrCaptains: resp,
+        isLoading: false,
+      });
+    });
   })
 )
 
@@ -81,6 +86,7 @@ render() {
     <div>
       <h1>Active Draft</h1>
       <p>Draft Code: {this.state.draftCode}</p>
+      <Button onClick={(e) => this.handleStartButton(e)}>Start</Button>
       <div className="d-flex justify-content-center mx-5 my-5">
         <Table>
         <thead>
@@ -98,12 +104,12 @@ render() {
             {Object.values(this.state.players).filter((player) => (
               player.available === true
             )).map((player) => (
-                <tr>
-                  <td>{player.first_name}</td>
-                  <td>{player.last_name}</td>
-                  <td>{player.age}</td>
-                  <td>{player.gender}</td>
-                  <td><Button onClick={() => { this.handleAddPlayerButton(player.id); }}>Add</Button></td>
+                <tr key={player.id}>
+                  <td >{player.first_name}</td>
+                  <td >{player.last_name}</td>
+                  <td >{player.age}</td>
+                  <td >{player.gender}</td>
+                  <td ><Button onClick={() => { this.handleAddPlayerButton(player.id); }}>Add</Button></td>
                 </tr>
             ))}
             </>

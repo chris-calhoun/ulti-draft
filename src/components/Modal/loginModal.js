@@ -31,7 +31,7 @@ const CreateDraftBtn = (props) => {
 
   return (
     <div>
-      <Button color="success" onClick={handleCreateBtnClick}>create draft</Button>
+      <Button className = "btn-block" color="success" onClick={handleCreateBtnClick}>create draft</Button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle}>Sign in to create draft</ModalHeader>
         <ModalBody className="d-flex justify-content-center">
