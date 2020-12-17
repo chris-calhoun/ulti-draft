@@ -98,12 +98,12 @@ render() {
             {Object.values(this.state.players).filter((player) => (
               player.available === true
             )).map((player) => (
-                <tr>
-                  <td>{player.first_name}</td>
-                  <td>{player.last_name}</td>
-                  <td>{player.age}</td>
-                  <td>{player.gender}</td>
-                  <td><Button onClick={() => { this.handleAddPlayerButton(player.id); }}>Add</Button></td>
+                <tr key={player.id}>
+                  <td >{player.first_name}</td>
+                  <td >{player.last_name}</td>
+                  <td >{player.age}</td>
+                  <td >{player.gender}</td>
+                  <td ><Button onClick={() => { this.handleAddPlayerButton(player.id); }}>Add</Button></td>
                 </tr>
             ))}
             </>
