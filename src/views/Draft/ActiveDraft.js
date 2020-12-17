@@ -17,7 +17,7 @@ state = {
   players: {},
   leagueTeams: {},
   activeCaptain: 'Chris',
-  activeTeamId: '-MObnqj2MSQEVoxiSPz6',
+  activeTeamId: '-MOmpxf2-d9HYM2fqUeo',
   base: {},
   arrCaptains: [],
   draftStarted: false,
@@ -85,7 +85,6 @@ getLeagueTeamInfo = (leagueKey) => (
 handleAddPlayerButton = (playerId) => {
   // console.warn('add button clicked');
   const { activeTeamId, players } = this.state;
-
   // create team-player join node
   TeamPlayersData.createTeamPlayerJoin(activeTeamId, playerId).then(() => {
     // change player available property to false.
@@ -97,6 +96,25 @@ handleAddPlayerButton = (playerId) => {
       players: playersCopy,
     });
   });
+  this.draftOrder();
+}
+
+draftOrder = () => {
+  const arrayOfTeams = Object.values(this.state.leagueTeams);
+  console.warn('array of Teams', arrayOfTeams);
+
+  // set last element to false
+  arrayOfTeams[arrayOfTeams.length - 1].isActive = false;
+  console.warn(arrayOfTeams);
+
+  // set last element to true
+  arrayOfTeams[0].isActive = true;
+  console.warn(arrayOfTeams);
+
+  this.setState({
+    arrayOfTeams,
+    activeTeamId: arrayOfTeams[0].teamKey,
+  });
 }
 
 // need in order to prevent memory leak
@@ -107,7 +125,7 @@ componentWillUnmount() {
 }
 
 render() {
-  const { draftStarted, activeCaptain } = this.state;
+  const { draftStarted, activeTeamId } = this.state;
   let showStartButton;
   let showQueue;
   const remainingPlayers = Object.values(this.state.players).filter((player) => (player.available === true)).length;
@@ -120,7 +138,7 @@ render() {
       break;
     case true:
       showQueue = (
-        <DraftQueue activeCaptain={activeCaptain}/>
+        <DraftQueue activeCaptain={activeTeamId}/>
       );
       break;
     default:
@@ -149,7 +167,6 @@ render() {
             <th>Add Player</th>
           </tr>
         </thead>
-
           <tbody>
             <>
             {/* filter players by whether or not they are available and then render on DOM */}
