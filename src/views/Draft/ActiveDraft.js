@@ -21,6 +21,7 @@ state = {
   base: {},
   arrCaptains: [],
   draftStarted: false,
+  arrTeamIds: '',
 }
 
 componentDidMount() {
@@ -100,21 +101,41 @@ handleAddPlayerButton = (playerId) => {
 }
 
 draftOrder = () => {
-  const arrayOfTeams = Object.values(this.state.leagueTeams);
-  console.warn('array of Teams', arrayOfTeams);
+  if (!this.state.arrTeamIds) {
+    const arrayOfTeams = Object.values(this.state.leagueTeams);
+    // console.warn('array of Teams', arrayOfTeams);
+    const justIds = arrayOfTeams.map((team) => team.teamKey);
+    console.warn(justIds);
 
-  // set last element to false
-  arrayOfTeams[arrayOfTeams.length - 1].isActive = false;
-  console.warn(arrayOfTeams);
+    const removedElement = justIds[0];
+    console.warn('removed element', removedElement);
 
-  // set last element to true
-  arrayOfTeams[0].isActive = true;
-  console.warn(arrayOfTeams);
+    const slicedArray = justIds.slice(1);
+    console.warn('sliced array', slicedArray);
 
-  this.setState({
-    arrayOfTeams,
-    activeTeamId: arrayOfTeams[0].teamKey,
-  });
+    slicedArray.push(removedElement);
+    console.warn('new sliced array', slicedArray);
+    this.setState({
+      // set state of new order of teams
+      arrTeamIds: slicedArray,
+      // set new active team
+      activeTeamId: slicedArray[0],
+    });
+  } else {
+    const justIds = this.state.arrTeamIds;
+    const removedElement = justIds[0];
+    console.warn('removed element', removedElement);
+    const slicedArray = justIds.slice(1);
+    console.warn('sliced array', slicedArray);
+    slicedArray.push(removedElement);
+    console.warn('new sliced array', slicedArray);
+    this.setState({
+      // set state of new order of teams
+      arrTeamIds: slicedArray,
+      // set new active team
+      activeTeamId: slicedArray[0],
+    });
+  }
 }
 
 // need in order to prevent memory leak
