@@ -8,5 +8,13 @@ const createTeamPlayerJoin = (teamKey, playerKey) => new Promise((resolve, rejec
     .catch((error) => reject(error));
 });
 
+const getTeamPlayers = (teamKey) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/TeamPlayers.json?orderBy="teamKey"&equalTo="${teamKey}"`).then(
+    (response) => {
+      resolve(Object.values(response.data));
+    },
+  ).catch((error) => reject(error));
+});
+
 // eslint-disable-next-line
-export default { createTeamPlayerJoin };
+export default { createTeamPlayerJoin, getTeamPlayers };

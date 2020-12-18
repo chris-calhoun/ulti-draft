@@ -1,12 +1,14 @@
 import React from 'react';
-import AppModal from '../Modal/appModal';
+import { Link } from 'react-router-dom';
 
 export default function TeamCard({ team }) {
   return (
     <div className='team-card card m-2'>
       <div className='card-body'>
         <h5 className='card-title'>Captain: {team.teamCaptain}</h5>
-        <AppModal title={'Team Players'} buttonLabel={'View Players'}></AppModal>
+        <Link className='btn btn-primary' color="success" to={`/players/${team.firebaseKey}`}>
+          View Players
+        </Link>
       </div>
     </div>
   );
