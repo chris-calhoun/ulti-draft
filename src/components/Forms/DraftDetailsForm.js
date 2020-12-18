@@ -32,6 +32,7 @@ class DraftDetailsForm extends Component {
       userId: '',
       zipcode: '',
       numTeams: '',
+      isActive: false,
     },
     playerData: [],
   }

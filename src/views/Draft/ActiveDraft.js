@@ -8,26 +8,32 @@ import {
 import LeagueTeamsData from '../../helpers/data/leagueTeamsData';
 import TeamData from '../../helpers/data/teamData';
 import TeamPlayersData from '../../helpers/data/TeamPlayersData';
+import DraftQueue from './DraftQueue';
+import DraftComplete from './DraftComplete';
 
 export default class ActiveDraft extends Component {
 state = {
   draftCode: '',
   players: {},
-  activeTeamId: '-MObnqj2MSQEVoxiSPz6',
+  leagueTeams: {},
+  activeCaptain: 'Chris',
+  activeTeamId: '-MOmpxf2-d9HYM2fqUeo',
   base: {},
   arrCaptains: [],
+  draftStarted: false,
+  arrTeamIds: '',
 }
 
 componentDidMount() {
   const draftCode = this.props.match.params.id;
   const base = Rebase.createClass(firebase.database());
 
-  // get league teams
   this.setState({
     draftCode,
     base,
   });
 
+  // sync list of players
   this.ref = base.syncState('/Player', {
     context: this,
     state: 'players',
@@ -36,11 +42,30 @@ componentDidMount() {
       equalTo: `${draftCode}`,
     },
   });
+
+  // sync active team
+  this.leagueTeams = base.syncState('/LeagueTeams', {
+    context: this,
+    state: 'leagueTeams',
+    queries: {
+      orderByChild: 'leagueKey',
+      equalTo: `${draftCode}`,
+    },
+  });
+
+  // sync active league
+  this.league = base.syncState(`/League/${draftCode}/isActive`, {
+    context: this,
+    state: 'draftStarted',
+  });
 }
 
 handleStartButton = (e) => {
   e.preventDefault();
   this.getLeagueTeamInfo(this.state.draftCode);
+  this.setState({
+    draftStarted: true,
+  });
 }
 
 getLeagueTeamInfo = (leagueKey) => (
@@ -53,7 +78,6 @@ getLeagueTeamInfo = (leagueKey) => (
       console.warn(resp);
       this.setState({
         arrCaptains: resp,
-        isLoading: false,
       });
     });
   })
@@ -62,7 +86,6 @@ getLeagueTeamInfo = (leagueKey) => (
 handleAddPlayerButton = (playerId) => {
   // console.warn('add button clicked');
   const { activeTeamId, players } = this.state;
-
   // create team-player join node
   TeamPlayersData.createTeamPlayerJoin(activeTeamId, playerId).then(() => {
     // change player available property to false.
@@ -74,20 +97,87 @@ handleAddPlayerButton = (playerId) => {
       players: playersCopy,
     });
   });
+  this.draftOrder();
+}
+
+draftOrder = () => {
+  if (!this.state.arrTeamIds) {
+    const arrayOfTeams = Object.values(this.state.leagueTeams);
+    // console.warn('array of Teams', arrayOfTeams);
+    const justIds = arrayOfTeams.map((team) => team.teamKey);
+    console.warn(justIds);
+
+    const removedElement = justIds[0];
+    console.warn('removed element', removedElement);
+
+    const slicedArray = justIds.slice(1);
+    console.warn('sliced array', slicedArray);
+
+    slicedArray.push(removedElement);
+    console.warn('new sliced array', slicedArray);
+    this.setState({
+      // set state of new order of teams
+      arrTeamIds: slicedArray,
+      // set new active team
+      activeTeamId: slicedArray[0],
+    });
+  } else {
+    const justIds = this.state.arrTeamIds;
+    const removedElement = justIds[0];
+    console.warn('removed element', removedElement);
+    const slicedArray = justIds.slice(1);
+    console.warn('sliced array', slicedArray);
+    slicedArray.push(removedElement);
+    console.warn('new sliced array', slicedArray);
+    this.setState({
+      // set state of new order of teams
+      arrTeamIds: slicedArray,
+      // set new active team
+      activeTeamId: slicedArray[0],
+    });
+  }
 }
 
 // need in order to prevent memory leak
 componentWillUnmount() {
   this.state.base.removeBinding(this.ref);
+  this.state.base.removeBinding(this.leagueTeams);
+  this.state.base.removeBinding(this.league);
 }
 
 render() {
+  const { draftStarted, activeTeamId } = this.state;
+  let showStartButton;
+  let showQueue;
+  const remainingPlayers = Object.values(this.state.players).filter((player) => (player.available === true)).length;
+
+  switch (draftStarted) {
+    case false:
+      showStartButton = (
+        <Button onClick={(e) => this.handleStartButton(e)}>Start</Button>
+      );
+      break;
+    case true:
+      showQueue = (
+        <DraftQueue activeCaptain={activeTeamId}/>
+      );
+      break;
+    default:
+      console.warn('draftStarted state not found.');
+  }
+
   return (
     <div>
       <h1>Active Draft</h1>
       <p>Draft Code: {this.state.draftCode}</p>
-      <Button onClick={(e) => this.handleStartButton(e)}>Start</Button>
+      {showStartButton}
+      {showQueue}
       <div className="d-flex justify-content-center mx-5 my-5">
+      { remainingPlayers === 0 ? (
+          <>
+            <DraftComplete />
+          </>
+      ) : (
         <Table>
         <thead>
           <tr>
@@ -98,7 +188,7 @@ render() {
             <th>Add Player</th>
           </tr>
         </thead>
-        <tbody>
+          <tbody>
             <>
             {/* filter players by whether or not they are available and then render on DOM */}
             {Object.values(this.state.players).filter((player) => (
@@ -113,8 +203,10 @@ render() {
                 </tr>
             ))}
             </>
-        </tbody>
+          </tbody>
       </Table>
+      )
+            }
     </div>
     </div>
   );
