@@ -17,7 +17,7 @@ const getLeague = (fbKey) => new Promise((resolve, reject) => {
 
 const getAllLeagues = () => new Promise((resolve, reject) => {
   axios.get(`${baseUrl}/League.json`).then((response) => {
-    resolve(Object.values(response.data));
+    resolve((response.data));
   }).catch((error) => reject(error));
 });
 

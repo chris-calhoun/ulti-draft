@@ -30,19 +30,34 @@ export default class Players extends Component {
     })
   )
 
+  deletePlayer = (e) => {
+    PlayerData.deletePlayer(e.target.id);
+    TeamPlayersData.deleteTeamPlayers(e.target.id);
+    const remainingPlayers = this.state.players.filter((player) => player.id !== e.target.id);
+    this.setState({
+      players: remainingPlayers,
+    });
+  }
+
+  componentWillUnmount() {
+    this.getPlayers();
+  }
+
   render() {
     const { players } = this.state;
     const renderPlayers = () => (
-      players.map((player) => (
-        <PlayerCard key={player.firebaseKey} player={player} />
+      Object.values(players).map((player) => (
+        <PlayerCard key={player.id} player={player} onDelete={this.deletePlayer} />
       ))
     );
     return (
       <div>
         <h1>Players</h1>
-        <div className='d-flex flex-wrap container justify-content-center'>
-          {renderPlayers()}
-        </div>
+        { players === null ? (<h3>No players have been created</h3>) : (
+          <div className='d-flex flex-wrap justify-content-center container'>
+            {renderPlayers()}
+          </div>
+        )}
       </div>
     );
   }
