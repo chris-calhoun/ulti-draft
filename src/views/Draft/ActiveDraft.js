@@ -173,38 +173,38 @@ render() {
       {showStartButton}
       {showQueue}
       <div className="d-flex justify-content-center mx-5 my-5">
-      { !remainingPlayers === 0 ? (
-          <Table>
-          <thead>
-            <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Age</th>
-              <th>Gender</th>
-              <th>Add Player</th>
-            </tr>
-          </thead>
-            <tbody>
-              <>
-              {/* filter players by whether or not they are available and then render on DOM */}
-              {Object.values(this.state.players).filter((player) => (
-                player.available === true
-              )).map((player) => (
-                  <tr key={player.id}>
-                    <td >{player.first_name}</td>
-                    <td >{player.last_name}</td>
-                    <td >{player.age}</td>
-                    <td >{player.gender}</td>
-                    <td ><Button onClick={() => { this.handleAddPlayerButton(player.id); }}>Add</Button></td>
-                  </tr>
-              ))}
-              </>
-            </tbody>
-        </Table>
-      ) : (
+      { remainingPlayers === 0 ? (
           <>
             <DraftComplete />
           </>
+      ) : (
+        <Table>
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Add Player</th>
+          </tr>
+        </thead>
+          <tbody>
+            <>
+            {/* filter players by whether or not they are available and then render on DOM */}
+            {Object.values(this.state.players).filter((player) => (
+              player.available === true
+            )).map((player) => (
+                <tr key={player.id}>
+                  <td >{player.first_name}</td>
+                  <td >{player.last_name}</td>
+                  <td >{player.age}</td>
+                  <td >{player.gender}</td>
+                  <td ><Button onClick={() => { this.handleAddPlayerButton(player.id); }}>Add</Button></td>
+                </tr>
+            ))}
+            </>
+          </tbody>
+      </Table>
       )
             }
     </div>
