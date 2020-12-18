@@ -34,7 +34,7 @@ export default class Teams extends Component {
     const { teams } = this.state;
     const renderTeams = () => (
       teams.map((team) => (
-        <TeamCard key={team.teamKey} team={team} />
+        <TeamCard key={team.firebaseKey} team={team} />
       ))
     );
     return (

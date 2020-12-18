@@ -10,5 +10,11 @@ const createPlayer = (obj) => new Promise((resolve, reject) => {
   // });
 });
 
+const getPlayer = (playerId) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/Player/${playerId}.json`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
+
 // eslint-disable-next-line
-export default { createPlayer };
+export default { createPlayer, getPlayer };
