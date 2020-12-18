@@ -34,15 +34,17 @@ export default class Teams extends Component {
     const { teams } = this.state;
     const renderTeams = () => (
       teams.map((team) => (
-        <TeamCard key={team.firebaseKey} team={team} />
+        Object.keys(team).length && <TeamCard key={team.firebaseKey} team={team} />
       ))
     );
     return (
       <div>
         <h1>Teams</h1>
-        <div className='d-flex flex-wrap container justify-content-center'>
-          {renderTeams()}
-        </div>
+        { teams.length === 0 ? (<h3>No teams</h3>) : (
+          <div className='d-flex flex-wrap container justify-content-center'>
+            {renderTeams}
+          </div>
+        )}
       </div>
     );
   }

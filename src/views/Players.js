@@ -33,7 +33,7 @@ export default class Players extends Component {
   deletePlayer = (e) => {
     PlayerData.deletePlayer(e.target.id);
     TeamPlayersData.deleteTeamPlayers(e.target.id);
-    const remainingPlayers = this.state.players.filter((player) => player.firebaseKey !== e.target.id);
+    const remainingPlayers = this.state.players.filter((player) => player.id !== e.target.id);
     this.setState({
       players: remainingPlayers,
     });
@@ -41,17 +41,20 @@ export default class Players extends Component {
 
   render() {
     const { players } = this.state;
+
     const renderPlayers = () => (
       players.map((player) => (
-        <PlayerCard key={player.firebaseKey} player={player} onDelete={this.deletePlayer}/>
+        Object.keys(player).length && <PlayerCard key={player.id} player={player} onDelete={this.deletePlayer}/>
       ))
     );
     return (
       <div>
         <h1>Players</h1>
-        <div className='d-flex flex-wrap container justify-content-center'>
-          {renderPlayers()}
-        </div>
+        { players.length === 0 ? (<h3>No players</h3>) : (
+          <div className='d-flex flex-wrap container justify-content-center'>
+            {renderPlayers}
+          </div>
+        )}
       </div>
     );
   }
