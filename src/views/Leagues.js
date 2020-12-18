@@ -21,14 +21,18 @@ export default class Leagues extends Component {
 
   render() {
     const { leagues } = this.state;
-    const showLeagues = () => (
-      leagues.map((league) => Object.keys(league).length && <LeaguesCard key={league.firebaseKey} league={league}/>)
+    const renderLeagues = () => (
+      Object.keys(leagues).map((league) => (
+        <LeaguesCard key={league.firebaseKey} league={league} />
+      ))
     );
     return (
       <div>
         <h1>Leagues</h1>
-        { leagues.length === 0 ? (<h3>No teams</h3>) : (
-          <div className='d-flex flex-wrap justify-content-center container'>{showLeagues}</div>
+        { leagues === null ? (<h3>No teams</h3>) : (
+          <div className='d-flex flex-wrap justify-content-center container'>
+            {renderLeagues()}
+          </div>
         )}
       </div>
     );
