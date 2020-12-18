@@ -39,20 +39,23 @@ export default class Players extends Component {
     });
   }
 
+  componentWillUnmount() {
+    this.getPlayers();
+  }
+
   render() {
     const { players } = this.state;
-
     const renderPlayers = () => (
-      players.map((player) => (
-        Object.keys(player).length && <PlayerCard key={player.id} player={player} onDelete={this.deletePlayer}/>
+      Object.values(players).map((player) => (
+        <PlayerCard key={player.id} player={player} onDelete={this.deletePlayer} />
       ))
     );
     return (
       <div>
         <h1>Players</h1>
-        { players.length === 0 ? (<h3>No players</h3>) : (
-          <div className='d-flex flex-wrap container justify-content-center'>
-            {renderPlayers}
+        { players === null ? (<h3>No players have been created</h3>) : (
+          <div className='d-flex flex-wrap justify-content-center container'>
+            {renderPlayers()}
           </div>
         )}
       </div>
