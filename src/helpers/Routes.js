@@ -7,6 +7,7 @@ import InputCaptainNames from '../views/Draft/InputCaptainNames';
 import Leagues from '../views/Leagues';
 import Teams from '../views/Teams';
 import NotFound from '../views/NotFound';
+import Players from '../views/Players';
 
 export default function Routes({ authed }) {
   return (
@@ -34,6 +35,10 @@ export default function Routes({ authed }) {
       <Route
         exact path='/teams/:id'
         component={(props) => <Teams authed={authed} {...props}/>}
+      />
+      <Route
+        exact path='/players/:id'
+        component={(props) => <Players authed={authed} {...props}/>}
       />
       <Route component={NotFound} />
     </Switch>
