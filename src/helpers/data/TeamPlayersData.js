@@ -16,5 +16,15 @@ const getTeamPlayers = (teamKey) => new Promise((resolve, reject) => {
   ).catch((error) => reject(error));
 });
 
+const deleteTeamPlayers = (playerId) => {
+  axios.get(`${baseUrl}/TeamPlayers.json?orderBy="playerKey"&equalTo="${playerId}"`)
+    .then((response) => {
+      const teamPlayerskeys = Object.keys(response.data);
+      teamPlayerskeys.forEach((teamPlayerFBKey) => {
+        axios.delete(`${baseUrl}/TeamPlayers/${teamPlayerFBKey}.json`);
+      });
+    });
+};
+
 // eslint-disable-next-line
-export default { createTeamPlayerJoin, getTeamPlayers };
+export default { createTeamPlayerJoin, getTeamPlayers, deleteTeamPlayers };

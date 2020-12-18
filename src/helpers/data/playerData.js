@@ -16,5 +16,7 @@ const getPlayer = (playerId) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
+const deletePlayer = (fbKey) => axios.delete(`${baseUrl}/Player/${fbKey}.json`);
+
 // eslint-disable-next-line
-export default { createPlayer, getPlayer };
+export default { createPlayer, getPlayer, deletePlayer };

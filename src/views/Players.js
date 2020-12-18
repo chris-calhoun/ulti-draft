@@ -30,11 +30,20 @@ export default class Players extends Component {
     })
   )
 
+  deletePlayer = (e) => {
+    PlayerData.deletePlayer(e.target.id);
+    TeamPlayersData.deleteTeamPlayers(e.target.id);
+    const remainingPlayers = this.state.players.filter((player) => player.firebaseKey !== e.target.id);
+    this.setState({
+      players: remainingPlayers,
+    });
+  }
+
   render() {
     const { players } = this.state;
     const renderPlayers = () => (
       players.map((player) => (
-        <PlayerCard key={player.firebaseKey} player={player} />
+        <PlayerCard key={player.firebaseKey} player={player} onDelete={this.deletePlayer}/>
       ))
     );
     return (
