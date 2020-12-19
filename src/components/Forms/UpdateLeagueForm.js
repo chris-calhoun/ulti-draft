@@ -42,6 +42,7 @@ export default class UpdateLeagueForm extends Component {
     LeagueData.updateLeague(this.state.leagueObj).then(() => {
       this.props.onUpdate(this.props.league.firebaseKey);
     });
+    this.props.toggle();
   }
 
   handleStartDateChange(value, formattedValue) {

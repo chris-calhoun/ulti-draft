@@ -39,6 +39,14 @@ export default class Players extends Component {
     })
   )
 
+  updatePlayerView = (teamId) => (
+    this.getPlayers(teamId).then((resp) => {
+      this.setState({
+        players: resp,
+      });
+    })
+  );
+
   deletePlayer = (e) => {
     PlayerData.deletePlayer(e.target.id);
     TeamPlayersData.deleteTeamPlayers(e.target.id);
@@ -65,7 +73,7 @@ export default class Players extends Component {
         { players === null ? (<h3>No players have been created</h3>) : (
           <>
             <AppModal title={'Add Player'} buttonLabel={'Add Player'}>
-              {<NewPlayerForm teamId={teamId} leagueId={leagueId} onUpdate={this.getPlayers}/>}
+              {<NewPlayerForm teamId={teamId} leagueId={leagueId} onUpdate={this.updatePlayerView}/>}
             </AppModal>
             <div className='d-flex flex-wrap justify-content-center container'>
               {renderPlayers()}

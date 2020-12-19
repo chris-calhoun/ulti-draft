@@ -1,3 +1,5 @@
+import Rebase from 're-base';
+import firebase from 'firebase';
 import React, { Component } from 'react';
 import {
   Col,
@@ -8,8 +10,11 @@ import {
   Label,
   Input,
 } from 'reactstrap';
-import PlayerData from '../../helpers/data/playerData';
-// import TeamPlayersData from '../../helpers/data/TeamPlayersData';
+import axios from 'axios';
+// import PlayerData from '../../helpers/data/playerData';
+import TeamPlayersData from '../../helpers/data/TeamPlayersData';
+
+const baseUrl = 'https://ulti-draft-default-rtdb.firebaseio.com/';
 
 export default class NewPlayerForm extends Component {
   state = {
@@ -21,8 +26,15 @@ export default class NewPlayerForm extends Component {
       gender: '',
       id: '',
       last_name: '',
-      leagueId: this.props?.leagueId,
+      leagueId: this.props?.leagueId || '',
     },
+  }
+
+  componentDidMount() {
+    const base = Rebase.createClass(firebase.database());
+    this.setState({
+      base,
+    });
   }
 
   handleChange = (e) => {
@@ -34,12 +46,28 @@ export default class NewPlayerForm extends Component {
     }));
   }
 
-  handleSave = (e) => {
+  addPlayer = () => {
+    const immediateRef = this.state.base.push('/Player', {
+      data: this.state.playerData,
+    });
+    const generatedKey = immediateRef.key;
+    const { teamId } = this.props;
+
+    this.patchKey(generatedKey);
+    TeamPlayersData.createTeamPlayerJoin(teamId, generatedKey);
+  }
+
+  patchKey = (playerId) => new Promise((resolve, reject) => {
+    axios.patch(`${baseUrl}/Player/${playerId}.json`, { id: playerId })
+      .then(resolve)
+      .catch((error) => reject(error));
+  })
+
+  handleSubmit = (e) => {
     e.preventDefault();
-    const { playerData } = this.state;
-    // console.warn(playerData);
-    PlayerData.addPlayer(playerData);
-    // TeamPlayersData.createTeamPlayerJoin(teamKey, playerId);
+    this.addPlayer();
+    this.props.onUpdate(this.props.teamId);
+    this.props.toggle();
   }
 
   render() {
@@ -79,7 +107,6 @@ export default class NewPlayerForm extends Component {
           </Col>
         </Row>
       </FormGroup>
-      <Button onClick={this.handleSave}>Save</Button>
       <Button>Submit</Button>
     </Form>
     );
