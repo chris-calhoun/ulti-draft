@@ -43,6 +43,16 @@ componentDidMount() {
     },
   });
 
+  // sync activeCaptain -- left off here.
+  this.ref = base.syncState('/LeagueTeams', {
+    context: this,
+    state: 'players',
+    queries: {
+      orderByChild: 'leagueId',
+      equalTo: `${draftCode}`,
+    },
+  });
+
   // sync active team
   this.leagueTeams = base.syncState('/LeagueTeams', {
     context: this,
@@ -154,7 +164,7 @@ render() {
   switch (draftStarted) {
     case false:
       showStartButton = (
-        <Button onClick={(e) => this.handleStartButton(e)}>Start</Button>
+        <Button className="btn-success" onClick={(e) => this.handleStartButton(e)}>Start</Button>
       );
       break;
     case true:

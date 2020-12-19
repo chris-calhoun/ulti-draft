@@ -37,6 +37,10 @@ export default class NewPlayerForm extends Component {
     });
   }
 
+  componentDidUpdate() {
+    this.props.onUpdate(this.props.teamId);
+  }
+
   handleChange = (e) => {
     this.setState((prevState) => ({
       playerData: {
@@ -66,7 +70,7 @@ export default class NewPlayerForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.addPlayer();
-    this.props.onUpdate(this.props.teamId);
+    // this.props.onUpdate(this.props.teamId);
     this.props.toggle();
   }
 
