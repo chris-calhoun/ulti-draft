@@ -9,7 +9,7 @@ import {
   Input,
 } from 'reactstrap';
 import PlayerData from '../../helpers/data/playerData';
-import TeamPlayersData from '../../helpers/data/TeamPlayersData';
+// import TeamPlayersData from '../../helpers/data/TeamPlayersData';
 
 export default class NewPlayerForm extends Component {
   state = {
@@ -34,14 +34,11 @@ export default class NewPlayerForm extends Component {
     }));
   }
 
-  handleSubmit = (e) => {
+  handleSave = (e) => {
     e.preventDefault();
-
-    const { playerData, teamKey } = this.state;
+    const { playerData } = this.state;
     // console.warn(playerData);
-    PlayerData.addPlayer(playerData).then(() => {
-      this.props.onUpdate(teamKey);
-    });
+    PlayerData.addPlayer(playerData);
     // TeamPlayersData.createTeamPlayerJoin(teamKey, playerId);
   }
 
@@ -82,6 +79,7 @@ export default class NewPlayerForm extends Component {
           </Col>
         </Row>
       </FormGroup>
+      <Button onClick={this.handleSave}>Save</Button>
       <Button>Submit</Button>
     </Form>
     );
