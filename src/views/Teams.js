@@ -20,7 +20,9 @@ export default class Teams extends Component {
     // 1. Make a call to the API that returns the teams associated with this league and set to state.
     this.getTeams(leagueId)
       .then((resp) => {
-        this.setState({ teams: resp });
+        this.setState({
+          teams: resp,
+        });
       });
   }
 
@@ -47,7 +49,7 @@ export default class Teams extends Component {
     const { teams, league } = this.state;
     const renderTeams = () => (
       Object.values(teams).map((team) => (
-        <TeamCard key={team.firebaseKey} team={team} />
+        <TeamCard key={team.firebaseKey} team={team} leagueId={this.props.match.params.id} />
       ))
     );
     return (

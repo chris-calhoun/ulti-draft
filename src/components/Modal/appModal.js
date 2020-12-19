@@ -21,7 +21,7 @@ const AppModal = (props) => {
       <Button color="success" onClick={toggle} className="mt-2 btn-success">{buttonLabel}</Button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
       <ModalHeader toggle={toggle}>{title}</ModalHeader>
-        <ModalBody>{props.children}</ModalBody>
+        <ModalBody>{React.cloneElement(props.children, { toggle })}</ModalBody>
       </Modal>
     </div>
   );
