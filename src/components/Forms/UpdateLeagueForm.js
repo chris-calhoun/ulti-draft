@@ -8,7 +8,6 @@ import {
   Label,
   Input,
 } from 'reactstrap';
-// import StateDropdown from '../Dropdown/stateDropdown';
 import LeagueData from '../../helpers/data/leagueData';
 
 const DatePicker = require('reactstrap-date-picker');
@@ -17,13 +16,10 @@ export default class UpdateLeagueForm extends Component {
   state = {
     leagueObj: {
       firebaseKey: this.props.league?.firebaseKey || '',
-      // city: this.props.league?.city || '',
-      // state: this.props.league?.state || '',
       startDate: this.props.league?.startDate || '',
       endDate: this.props.league?.endDate || '',
       fieldAddress: this.props.league?.fieldAddress || '',
       leagueName: this.props.league?.leagueName || '',
-      // zipcode: this.props.league?.zipcode || '',
     },
   }
 
@@ -78,25 +74,6 @@ export default class UpdateLeagueForm extends Component {
         <Label htmlFor="fieldAddress">Field Address</Label>
         <Input type="text" name="fieldAddress" id="addressId" value={this.state.leagueObj.fieldAddress} onChange={this.handleChange}/>
       </FormGroup>
-      {/* <Row form>
-        <Col md={6}>
-          <FormGroup>
-            <Label htmlFor="city">City</Label>
-            <Input type="text" name="city" id="cityId" value={this.state.leagueObj.city} onChange={this.handleChange}/>
-          </FormGroup>
-        </Col>
-        <Col md={4}>
-          <FormGroup>
-            <StateDropdown onChange={this.handleChange}/>
-          </FormGroup>
-        </Col>
-        <Col md={2}>
-          <FormGroup>
-            <Label htmlFor="zipcode">Zip</Label>
-            <Input type="text" name="zipcode" id="zipcodeId" value={this.state.leagueObj.zipcode} onChange={this.handleChange}/>
-          </FormGroup>
-        </Col>
-      </Row> */}
       <FormGroup>
         <Row>
           <Col md={6}>

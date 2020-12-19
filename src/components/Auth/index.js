@@ -17,7 +17,6 @@ export default class Auth extends Component {
 
   render() {
     const { authed } = this.props;
-    // console.warn(authed);
     return (
       <>
       {/* if not logged in, show login button */}

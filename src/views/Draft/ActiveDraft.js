@@ -43,16 +43,6 @@ componentDidMount() {
     },
   });
 
-  // sync activeCaptain -- left off here.
-  this.ref = base.syncState('/LeagueTeams', {
-    context: this,
-    state: 'players',
-    queries: {
-      orderByChild: 'leagueId',
-      equalTo: `${draftCode}`,
-    },
-  });
-
   // sync active team
   this.leagueTeams = base.syncState('/LeagueTeams', {
     context: this,
@@ -80,12 +70,9 @@ handleStartButton = (e) => {
 
 getLeagueTeamInfo = (leagueKey) => (
   LeagueTeamsData.getLeagueTeams(leagueKey).then((response) => {
-    // console.warn(response);
     const teamArray = [];
     response.forEach((team) => (teamArray.push(TeamData.getTeam(team.teamKey))));
-    // returning an array of all the fulfilled promises
     Promise.all(teamArray).then((resp) => {
-      console.warn(resp);
       this.setState({
         arrCaptains: resp,
       });
@@ -94,9 +81,7 @@ getLeagueTeamInfo = (leagueKey) => (
 )
 
 handleAddPlayerButton = (playerId) => {
-  // console.warn('add button clicked');
   const { activeTeamId, players } = this.state;
-  // create team-player join node
   TeamPlayersData.createTeamPlayerJoin(activeTeamId, playerId).then(() => {
     // change player available property to false.
     const playersCopy = { ...players };
@@ -113,18 +98,10 @@ handleAddPlayerButton = (playerId) => {
 draftOrder = () => {
   if (!this.state.arrTeamIds) {
     const arrayOfTeams = Object.values(this.state.leagueTeams);
-    // console.warn('array of Teams', arrayOfTeams);
     const justIds = arrayOfTeams.map((team) => team.teamKey);
-    // console.warn(justIds);
-
     const removedElement = justIds[0];
-    // console.warn('removed element', removedElement);
-
     const slicedArray = justIds.slice(1);
-    // console.warn('sliced array', slicedArray);
-
     slicedArray.push(removedElement);
-    // console.warn('new sliced array', slicedArray);
     this.setState({
       // set state of new order of teams
       arrTeamIds: slicedArray,
@@ -134,15 +111,10 @@ draftOrder = () => {
   } else {
     const justIds = this.state.arrTeamIds;
     const removedElement = justIds[0];
-    // console.warn('removed element', removedElement);
     const slicedArray = justIds.slice(1);
-    // console.warn('sliced array', slicedArray);
     slicedArray.push(removedElement);
-    // console.warn('new sliced array', slicedArray);
     this.setState({
-      // set state of new order of teams
       arrTeamIds: slicedArray,
-      // set new active team
       activeTeamId: slicedArray[0],
     });
   }

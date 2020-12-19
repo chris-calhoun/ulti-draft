@@ -13,7 +13,6 @@ export default function LeaguesCard({ league }) {
         <Link className='btn btn-primary' color="success" to={`/teams/${league.firebaseKey}`}>
           View Teams
         </Link>
-        {/* <button id={league.firebaseKey} onClick={onDelete} className='btn btn-danger'>Delete</button> */}
       </div>
     </div>
   );
