@@ -26,7 +26,7 @@ state = {
 
 componentDidMount() {
   const draftCode = this.props.match.params.id;
-  console.warn(draftCode);
+  // console.warn(draftCode);
   const base = Rebase.createClass(firebase.database());
 
   // sync list of players
@@ -142,7 +142,7 @@ render() {
       break;
     case true:
       remainingPlayers = Object.values(this.state.players).filter((player) => (player.available === true)).length;
-      console.warn(remainingPlayers);
+      // console.warn(remainingPlayers);
       showQueue = (
         <DraftQueue activeCaptain={activeTeamId}/>
       );
