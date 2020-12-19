@@ -21,5 +21,10 @@ const getAllLeagues = () => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
+const updateLeague = (object) => new Promise((resolve, reject) => {
+  axios.patch(`${baseUrl}/League/${object.firebaseKey}.json`, object)
+    .then(resolve).catch((error) => reject(error));
+});
+
 // eslint-disable-next-line
-export default { createLeague, getLeague, getAllLeagues };
+export default { createLeague, getLeague, getAllLeagues, updateLeague };

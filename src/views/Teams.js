@@ -3,6 +3,8 @@ import LeagueTeamsData from '../helpers/data/leagueTeamsData';
 import TeamData from '../helpers/data/teamData';
 import TeamCard from '../components/Cards/teamCard';
 import LeagueData from '../helpers/data/leagueData';
+import AppModal from '../components/Modal/appModal';
+import UpdateLeagueForm from '../components/Forms/UpdateLeagueForm';
 
 export default class Teams extends Component {
   state = {
@@ -53,10 +55,15 @@ export default class Teams extends Component {
         <h1>Teams</h1>
         { teams === null ? (<h3>No teams have been created</h3>) : (
           <>
+          <div className='mx-5'>
             <h4>{league.leagueName}</h4>
-            <div className='d-flex flex-wrap justify-content-center container'>
-              {renderTeams()}
-            </div>
+            <AppModal title={'Update League'} buttonLabel={'Update League'}>
+              {Object.keys(league).length && <UpdateLeagueForm league={league} onUpdate={this.getLeagueInfo}/>}
+            </AppModal>
+          </div>
+          <div className='d-flex flex-wrap justify-content-center container'>
+            {renderTeams()}
+          </div>
           </>
         )}
       </div>
