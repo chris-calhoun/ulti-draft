@@ -64,7 +64,7 @@ export default class NewPlayerForm extends Component {
       </Row>
       <FormGroup>
         <Row>
-          <Col md={3}>
+          <Col md={6}>
             <FormGroup>
               <Label htmlFor="age">Age</Label>
               <Input type="text" name="age" id="ageId" value={this.state.playerData.age} onChange={this.handleChange}/>
@@ -74,7 +74,7 @@ export default class NewPlayerForm extends Component {
       </FormGroup>
       <FormGroup>
         <Row>
-        <Col md={3}>
+        <Col md={6}>
             <FormGroup>
               <Label htmlFor="gender">Gender</Label>
               <Input type="text" name="gender" id="genderId" value={this.state.playerData.gender} onChange={this.handleChange}/>
