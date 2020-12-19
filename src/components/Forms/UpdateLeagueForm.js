@@ -17,24 +17,15 @@ export default class UpdateLeagueForm extends Component {
   state = {
     leagueObj: {
       firebaseKey: this.props.league?.firebaseKey || '',
-      city: this.props?.league?.city || '',
-      state: this.props?.league?.state || '',
-      startDate: this.props?.league?.startDate || '',
-      endDate: this.props?.league?.endDate || '',
-      fieldAddress: this.props?.fieldAddress || '',
-      leagueName: this.props?.leagueName || '',
-      zipcode: this.props?.zipcode || '',
+      city: this.props.league?.city || '',
+      state: this.props.league?.state || '',
+      startDate: this.props.league?.startDate || '',
+      endDate: this.props.league?.endDate || '',
+      fieldAddress: this.props.fieldAddress || '',
+      leagueName: this.props.leagueName || '',
+      zipcode: this.props.zipcode || '',
     },
   }
-
-  // componentDidMount() {
-  //   const userId = AuthData.getUid();
-  //   const leagueCopy = this.state.leagueObj;
-  //   leagueCopy.userId = userId;
-  //   this.setState({
-  //     leagueObj: leagueCopy,
-  //   });
-  // }
 
   handleChange = (e) => {
     const leagueCopy = this.state.leagueObj;
@@ -78,19 +69,19 @@ export default class UpdateLeagueForm extends Component {
         <Col>
           <FormGroup>
             <Label htmlFor="leagueName">League Name</Label>
-            <Input type="text" name="leagueName" id="leagueNameId" placeholder="Nashville Indoor League" value={this.state.leagueObj.leagueName} onChange={this.handleChange} />
+            <Input type="text" name="leagueName" id="leagueNameId" value={this.state.leagueObj.leagueName} onChange={this.handleChange} />
           </FormGroup>
         </Col>
       </Row>
       <FormGroup>
         <Label htmlFor="fieldAddress">Field Address</Label>
-        <Input type="text" name="fieldAddress" id="addressId" placeholder="2500 West End Ave." value={this.state.leagueObj.address} onChange={this.handleChange}/>
+        <Input type="text" name="fieldAddress" id="addressId" value={this.state.leagueObj.fieldAddress} onChange={this.handleChange}/>
       </FormGroup>
       <Row form>
         <Col md={6}>
           <FormGroup>
             <Label htmlFor="city">City</Label>
-            <Input type="text" name="city" id="cityId" placeholder="Nashville" value={this.state.leagueObj.city} onChange={this.handleChange}/>
+            <Input type="text" name="city" id="cityId" value={this.state.leagueObj.city} onChange={this.handleChange}/>
           </FormGroup>
         </Col>
         <Col md={4}>
@@ -101,7 +92,7 @@ export default class UpdateLeagueForm extends Component {
         <Col md={2}>
           <FormGroup>
             <Label htmlFor="zipcode">Zip</Label>
-            <Input type="text" name="zipcode" id="zipcodeId" placeholder="37203" value={this.state.leagueObj.zipcode} onChange={this.handleChange}/>
+            <Input type="text" name="zipcode" id="zipcodeId" value={this.state.leagueObj.zipcode} onChange={this.handleChange}/>
           </FormGroup>
         </Col>
       </Row>
