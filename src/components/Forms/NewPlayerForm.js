@@ -25,17 +25,21 @@ export default class NewPlayerForm extends Component {
   }
 
   handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
+    this.setState((prevState) => ({
+      playerData: {
+        ...prevState.playerData,
+        [e.target.name]: e.target.value,
+      },
+    }));
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { playerData } = this.state;
+
+    const { playerData, teamKey } = this.state;
     console.warn(playerData);
-    PlayerData.createPlayer(playerData).then(() => {
-      this.props.onUpdate();
+    PlayerData.addPlayer(playerData).then(() => {
+      this.props.onUpdate(teamKey);
     });
   }
 
@@ -43,19 +47,35 @@ export default class NewPlayerForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} className="mb-5">
       <Row form>
-        <Col md={6}>
+        <Col md={3}>
           <FormGroup>
             <Label htmlFor="first_name">First Name</Label>
             <Input type="text" name="first_name" id="firstNameId" value={this.state.playerData.first_name} onChange={this.handleChange}/>
           </FormGroup>
         </Col>
-        <Col md={6}>
+        <Col md={3}>
           <FormGroup>
             <Label htmlFor="last_name">Last Name</Label>
             <Input type="text" name="last_name" id="lastNameId" value={this.state.playerData.last_name} onChange={this.handleChange}/>
           </FormGroup>
         </Col>
       </Row>
+      <FormGroup>
+        <Row>
+          <Col md={3}>
+            <FormGroup>
+              <Label htmlFor="age">Age</Label>
+              <Input type="text" name="age" id="ageId" value={this.state.playerData.age} onChange={this.handleChange}/>
+            </FormGroup>
+          </Col>
+          <Col md={3}>
+            <FormGroup>
+              <Label htmlFor="gender">Gender</Label>
+              <Input type="text" name="gender" id="genderId" value={this.state.playerData.gender} onChange={this.handleChange}/>
+            </FormGroup>
+          </Col>
+        </Row>
+      </FormGroup>
       <Button>Submit</Button>
     </Form>
     );

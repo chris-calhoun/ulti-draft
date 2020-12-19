@@ -15,25 +15,17 @@ export default class Players extends Component {
   componentDidMount() {
     // 1. pull teamId from URL params
     const teamId = this.props.match.params.id;
-    if (this.state.leagueId === '') {
-      const { leagueId } = this.props.location;
-      this.getPlayers(teamId)
-        .then((resp) => {
-          this.setState({
-            players: resp,
-            teamId,
-            leagueId,
-          });
+    const { leagueId } = this.props.location;
+
+    // 1. Make a call to the API that returns the players associated with this team and set to state.
+    this.getPlayers(teamId)
+      .then((resp) => {
+        this.setState({
+          players: resp,
+          teamId,
+          leagueId,
         });
-    } else {
-      this.getPlayers(teamId)
-        .then((resp) => {
-          this.setState({
-            players: resp,
-            teamId,
-          });
-        });
-    }
+      });
   }
 
   getPlayers = (teamId) => (
@@ -73,7 +65,7 @@ export default class Players extends Component {
         { players === null ? (<h3>No players have been created</h3>) : (
           <>
             <AppModal title={'Add Player'} buttonLabel={'Add Player'}>
-              {<NewPlayerForm teamId={teamId} leagueId={leagueId} onUpdate={this.getPlayers(teamId)}/>}
+              {<NewPlayerForm teamId={teamId} leagueId={leagueId} onUpdate={this.getPlayers}/>}
             </AppModal>
             <div className='d-flex flex-wrap justify-content-center container'>
               {renderPlayers()}
