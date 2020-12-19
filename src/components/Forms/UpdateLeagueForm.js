@@ -8,7 +8,7 @@ import {
   Label,
   Input,
 } from 'reactstrap';
-import StateDropdown from '../Dropdown/stateDropdown';
+// import StateDropdown from '../Dropdown/stateDropdown';
 import LeagueData from '../../helpers/data/leagueData';
 
 const DatePicker = require('reactstrap-date-picker');
@@ -17,13 +17,13 @@ export default class UpdateLeagueForm extends Component {
   state = {
     leagueObj: {
       firebaseKey: this.props.league?.firebaseKey || '',
-      city: this.props.league?.city || '',
-      state: this.props.league?.state || '',
+      // city: this.props.league?.city || '',
+      // state: this.props.league?.state || '',
       startDate: this.props.league?.startDate || '',
       endDate: this.props.league?.endDate || '',
-      fieldAddress: this.props.fieldAddress || '',
-      leagueName: this.props.leagueName || '',
-      zipcode: this.props.zipcode || '',
+      fieldAddress: this.props.league.fieldAddress || '',
+      leagueName: this.props.league?.leagueName || '',
+      // zipcode: this.props.league?.zipcode || '',
     },
   }
 
@@ -77,7 +77,7 @@ export default class UpdateLeagueForm extends Component {
         <Label htmlFor="fieldAddress">Field Address</Label>
         <Input type="text" name="fieldAddress" id="addressId" value={this.state.leagueObj.fieldAddress} onChange={this.handleChange}/>
       </FormGroup>
-      <Row form>
+      {/* <Row form>
         <Col md={6}>
           <FormGroup>
             <Label htmlFor="city">City</Label>
@@ -95,7 +95,7 @@ export default class UpdateLeagueForm extends Component {
             <Input type="text" name="zipcode" id="zipcodeId" value={this.state.leagueObj.zipcode} onChange={this.handleChange}/>
           </FormGroup>
         </Col>
-      </Row>
+      </Row> */}
       <FormGroup>
         <Row>
           <Col md={6}>
