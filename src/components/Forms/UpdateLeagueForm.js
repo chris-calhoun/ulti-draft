@@ -21,7 +21,7 @@ export default class UpdateLeagueForm extends Component {
       // state: this.props.league?.state || '',
       startDate: this.props.league?.startDate || '',
       endDate: this.props.league?.endDate || '',
-      fieldAddress: this.props.league.fieldAddress || '',
+      fieldAddress: this.props.league?.fieldAddress || '',
       leagueName: this.props.league?.leagueName || '',
       // zipcode: this.props.league?.zipcode || '',
     },
