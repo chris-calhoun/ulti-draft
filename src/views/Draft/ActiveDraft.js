@@ -14,7 +14,7 @@ import DraftComplete from './DraftComplete';
 export default class ActiveDraft extends Component {
 state = {
   draftCode: '',
-  players: {},
+  players: { name: 'Chris' },
   leagueTeams: {},
   activeCaptain: 'Chris',
   activeTeamId: '-MOmpxf2-d9HYM2fqUeo',
@@ -26,12 +26,8 @@ state = {
 
 componentDidMount() {
   const draftCode = this.props.match.params.id;
+  console.warn(draftCode);
   const base = Rebase.createClass(firebase.database());
-
-  this.setState({
-    draftCode,
-    base,
-  });
 
   // sync list of players
   this.ref = base.syncState('/Player', {
@@ -57,6 +53,10 @@ componentDidMount() {
   this.league = base.syncState(`/League/${draftCode}/isActive`, {
     context: this,
     state: 'draftStarted',
+  });
+  this.setState({
+    draftCode,
+    base,
   });
 }
 
@@ -131,7 +131,8 @@ render() {
   const { draftStarted, activeTeamId } = this.state;
   let showStartButton;
   let showQueue;
-  const remainingPlayers = Object.values(this.state.players).filter((player) => (player.available === true)).length;
+  let showDraft;
+  let remainingPlayers;
 
   switch (draftStarted) {
     case false:
@@ -140,26 +141,17 @@ render() {
       );
       break;
     case true:
+      remainingPlayers = Object.values(this.state.players).filter((player) => (player.available === true)).length;
+      console.warn(remainingPlayers);
       showQueue = (
         <DraftQueue activeCaptain={activeTeamId}/>
       );
-      break;
-    default:
-      console.warn('draftStarted state not found.');
-  }
-
-  return (
-    <div>
-      <h1>Active Draft</h1>
-      <p>Draft Code: {this.state.draftCode}</p>
-      {showStartButton}
-      {showQueue}
-      <div className="d-flex justify-content-center mx-5 my-5">
-      { remainingPlayers === 0 ? (
+      showDraft = (
+        remainingPlayers === 0 ? (
           <>
             <DraftComplete />
           </>
-      ) : (
+        ) : (
         <Table>
         <thead>
           <tr>
@@ -187,8 +179,23 @@ render() {
             </>
           </tbody>
       </Table>
-      )
-            }
+        )
+
+      );
+      break;
+    default:
+      console.warn('draftStarted state not found.');
+  }
+
+  return (
+    <div>
+      <h1>Active Draft</h1>
+      <p>Draft Code: {this.state.draftCode}</p>
+      {showStartButton}
+      {showQueue}
+      <div className="d-flex justify-content-center mx-5 my-5">
+        {showDraft}
+
     </div>
     </div>
   );
