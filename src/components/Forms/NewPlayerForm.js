@@ -9,6 +9,7 @@ import {
   Input,
 } from 'reactstrap';
 import PlayerData from '../../helpers/data/playerData';
+import TeamPlayersData from '../../helpers/data/TeamPlayersData';
 
 export default class NewPlayerForm extends Component {
   state = {
@@ -37,23 +38,24 @@ export default class NewPlayerForm extends Component {
     e.preventDefault();
 
     const { playerData, teamKey } = this.state;
-    console.warn(playerData);
+    // console.warn(playerData);
     PlayerData.addPlayer(playerData).then(() => {
       this.props.onUpdate(teamKey);
     });
+    // TeamPlayersData.createTeamPlayerJoin(teamKey, playerId);
   }
 
   render() {
     return (
       <Form onSubmit={this.handleSubmit} className="mb-5">
       <Row form>
-        <Col md={3}>
+        <Col md={6}>
           <FormGroup>
             <Label htmlFor="first_name">First Name</Label>
             <Input type="text" name="first_name" id="firstNameId" value={this.state.playerData.first_name} onChange={this.handleChange}/>
           </FormGroup>
         </Col>
-        <Col md={3}>
+        <Col md={6}>
           <FormGroup>
             <Label htmlFor="last_name">Last Name</Label>
             <Input type="text" name="last_name" id="lastNameId" value={this.state.playerData.last_name} onChange={this.handleChange}/>
@@ -68,7 +70,11 @@ export default class NewPlayerForm extends Component {
               <Input type="text" name="age" id="ageId" value={this.state.playerData.age} onChange={this.handleChange}/>
             </FormGroup>
           </Col>
-          <Col md={3}>
+        </Row>
+      </FormGroup>
+      <FormGroup>
+        <Row>
+        <Col md={3}>
             <FormGroup>
               <Label htmlFor="gender">Gender</Label>
               <Input type="text" name="gender" id="genderId" value={this.state.playerData.gender} onChange={this.handleChange}/>

@@ -13,7 +13,7 @@ const createPlayer = (obj) => new Promise((resolve, reject) => {
 const addPlayer = (obj) => new Promise((resolve, reject) => {
   axios.post(`${baseUrl}/Player.json`, obj)
     .then((response) => {
-      axios.patch(`${baseUrl}/Player/${response.data.name}.json`, { id: response.data.name }).then(resolve);
+      axios.patch(`${baseUrl}/Player/${response.data.name}.json`, { id: response.data.name }).then(resolve.data);
     }).catch((error) => reject(error));
   // });
 });
