@@ -11,7 +11,6 @@ import {
   Input,
 } from 'reactstrap';
 import axios from 'axios';
-// import PlayerData from '../../helpers/data/playerData';
 import TeamPlayersData from '../../helpers/data/TeamPlayersData';
 
 const baseUrl = 'https://ulti-draft-default-rtdb.firebaseio.com/';

@@ -57,26 +57,21 @@ class CaptainsForm extends Component {
       TeamData.createTeam(team)
         .then((response) => {
           const teamFBKey = response.data.firebaseKey;
-          // console.warn(response.data.leagueFireBK);
           LeagueTeamData.createLeagueTeamJoin(teamFBKey, leagueFireBK);
         });
     });
-    // console.warn(response.data.firebaseKey);
     this.navigateToDraft();
   }
 
   handleClickAddPlayer = (e) => {
     e.preventDefault();
     const numCaptainsAdded = this.state.arrCaptains.length + 1;
-    // console.warn('# of caps: ', numCaptainsAdded);
-    // console.warn('# of teams: ', this.state.numberOfTeams);
     if (numCaptainsAdded === this.state.numberOfTeams) {
       const lastCaptain = this.state.teamCaptain;
       this.setState({
         arrCaptains: [...this.state.arrCaptains, { teamCaptain: lastCaptain }],
         teamCaptain: '',
       });
-      // change add button to submit button
       this.setState({
         addOrSubmit: 'submit',
       });
@@ -126,7 +121,6 @@ class CaptainsForm extends Component {
 
     return (
       <div>
-        {/* <p>Props: {this.state.numberOfTeams}</p> */}
         <div className="captainForm mx-5">
           <Form onSubmit={this.handleSubmit}>
             <FormGroup row>

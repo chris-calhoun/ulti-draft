@@ -105,13 +105,12 @@ class DraftDetailsForm extends Component {
 
   // papa-parse
   handleOnDrop = (data) => {
-    // console.warn(data);
     this.setState({
       playerData: data,
     });
   }
 
-  handleOnError = (err, file, inputElem, reason) => {
+  handleOnError = (err) => {
     console.warn(err);
   }
 
